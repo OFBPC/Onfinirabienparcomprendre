@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galerie - OFBPC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Montserrat', sans-serif; color: #fff; background: #000; text-align: center; padding: 50px; }
+    h1 { font-size: 2.5rem; margin-bottom: 20px; }
+    .carousel-container {
+      position: relative;
+      max-width: 80%;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .carousel-slide {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+    }
+
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 2rem;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    .thumbnail-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .thumbnail {
+      width: 100px;
+      height: 70px;
+      object-fit: cover;
+      margin: 5px;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: 0.3s;
+    }
+
+    .thumbnail:hover { opacity: 1; }
+  </style>
+</head>
+<body>
+  <h1>Galerie</h1>
+  <div class="carousel-container">
+    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+    <div class="carousel-slide">
+      <img src="18-%20Illusions.jpg" alt="Illusions">
+      <img src="01-%20Illusions.jpg" alt="Illusions">
+      <img src="09-%20Illusions.jpg" alt="Illusions">
+ <img src="11-%20Illusions.jpg" alt="Illusions">
+ <img src="13-%20Illusions.jpg" alt="Illusions">
+ <img src="16-%20Illusions.jpg" alt="Illusions">
+ <img src="29-%20Illusions.jpg" alt="Illusions">
+ <img src="34-%20Illusions.jpg" alt="Illusions">
+<img src="37-%20Illusions.jpg" alt="Illusions">
+    </div>
+    <button class="next" onclick="moveSlide(1)">&#10095;</button>
+  </div>
+
+  <div class="thumbnail-container">
+    <img class="thumbnail" src="18-%20Illusions.jpg" onclick="setSlide(0)">
+    <img class="thumbnail" src="01-%20Illusions.jpg" onclick="setSlide(1)">
+    <img class="thumbnail" src="09-%20Illusions.jpg" onclick="setSlide(2)">
+    <img class="thumbnail" src="11-%20Illusions.jpg" onclick="setSlide(4)">
+    <img class="thumbnail" src="13-%20Illusions.jpg" onclick="setSlide(5)">
+    <img class="thumbnail" src="16-%20Illusions.jpg" onclick="setSlide(6)">
+    <img class="thumbnail" src="29-%20Illusions.jpg" onclick="setSlide(7)">
+    <img class="thumbnail" src="34-%20Illusions.jpg" onclick="setSlide(8)">
+    <img class="thumbnail" src="37-%20Illusions.jpg" onclick="setSlide(9)">
+  </div>
+
+  <br>
+  <a href="index.html" style="color: #FFD700; text-decoration: none; font-size: 1.2rem;">← Retour à l'accueil</a>
+
+  <script>
+    let slideIndex = 0;
+    const slides = document.querySelector('.carousel-slide');
+    const images = document.querySelectorAll('.carousel-slide img');
+    const totalSlides = images.length;
+
+    function moveSlide(n) {
+      slideIndex = (slideIndex + n + totalSlides) % totalSlides;
+      updateSlide();
+    }
+
+    function setSlide(n) {
+      slideIndex = n;
+      updateSlide();
+    }
+
+    function updateSlide() {
+      const offset = -slideIndex * 100;
+      slides.style.transform = `translateX(${offset}%)`;
+    }
+  </script>
+</body>
+</html>
+
+ 

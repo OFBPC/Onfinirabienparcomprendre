@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presse - OFBPC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Montserrat', sans-serif; color: #FFFFFF; background: #000; text-align: center; padding: 50px; }
+    h1 { font-size: 2.5rem; margin-bottom: 20px; color: #FFFFFF; }
+    p { max-width: 800px; margin: 20px auto; font-size: 1.2rem; text-align: justify; }
+    .press-section { max-width: 1000px; margin: auto; text-align: left; padding: 20px; }
+    .article { margin-bottom: 40px; border-bottom: 1px solid #555; padding-bottom: 20px; }
+    .article h2 { color: #0000FF; }
+    a { color: #0000FF; text-decoration: none; font-weight: bold; }
+    img { width: 100%; max-width: 800px; margin-top: 20px; }
+    
+    /* Menu */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 15px 5px;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu-btn {
+      font-size: 24px;
+      cursor: pointer;
+      display: block;
+      color: white;
+    }
+
+    .menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: rgba(0,0,0,0.9);
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .menu ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .menu ul li {
+      margin: 10px 0;
+    }
+
+    .menu ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .menu.open {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="menu-btn">☰</div>
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="collectif.html">Le Collectif</a></li>
+        <li><a href="creations.html">Les Créations</a></li>
+        <li><a href="actualites.html">Actualités</a></li>
+        <li><a href="equipe.html">L'Équipe</a></li>
+        <li><a href="presse.html">Presse</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <h1>Presse</h1>
+  <div class="press-section">
+    <div class="article">
+      <h2>Critique de Illusions - L'Est Éclair</h2>
+      <p>Une critique du spectacle *Illusions* publiée dans L'Est Éclair.</p>
+      <img src="presse_esteclair.jpg" alt="Critique de Illusions dans L'Est Éclair">
+    </div>
+    
+    <div class="article">
+      <h2>Critique de Illusions - RFI Russie</h2>
+      <p>Un article détaillé sur *Illusions* publié par RFI Russie.</p>
+      <a href="https://www.rfi.fr/ru/%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D0%B0-%D1%81%D1%82%D0%B8%D0%BB%D1%8C-%D0%B6%D0%B8%D0%B7%D0%BD%D0%B8/20240524-%D0%BF%D1%8C%D0%B5%D1%81%D0%B0-%D0%B8%D0%B2%D0%B0%D0%BD%D0%B0-%D0%B2%D1%8B%D1%80%D1%8B%D0%BF%D0%B0%D0%B5%D0%B2%D0%B0-%D0%B8%D0%BB%D0%BB%D1%8E%D0%B7%D0%B8%D0%B8-%D0%B8%D0%B4%D0%B5%D1%82-%D0%B4%D0%BE-26-%D0%BC%D0%B0%D1%8F-%D0%BD%D0%B0-%D1%81%D1%86%D0%B5%D0%BD%D0%B5-%D0%BF%D0%B0%D1%80%D0%B8%D0%B6%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D1%82%D0%B5%D0%B0%D1%82%D1%80%D0%B0-lavoir-moderne-parisien" target="_blank">Lire l'article</a>
+    </div>
+  </div>
+  
+  <br>
+  <a href="index.html">Retour à l'accueil</a>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector(".menu-btn").addEventListener("click", function() {
+            document.querySelector(".menu").classList.toggle("open");
+        });
+    });
+  </script>
+</body>
+</html>

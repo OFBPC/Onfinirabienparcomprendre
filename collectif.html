@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Collectif - OFBPC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Montserrat', sans-serif; color: #fff; background: #000; text-align: center; padding: 50px; }
+    h1 { font-size: 2.5rem; }
+    p { max-width: 800px; margin: 20px auto; font-size: 1.2rem; text-align: justify; }
+    a { color: #FFD700; text-decoration: none; font-weight: bold; }
+    .container { max-width: 1000px; margin: auto; }
+    .image-container { margin: 30px auto; text-align: center; }
+    .image-container img { max-width: 80%; height: auto; border-radius: 10px; }
+  
+    /* Menu */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 15px 5px;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu-btn {
+      font-size: 24px;
+      cursor: pointer;
+      display: block;
+      color: white;
+    }
+
+    .menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: rgba(0,0,0,0.9);
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .menu ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .menu ul li {
+      margin: 10px 0;
+    }
+
+    .menu ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .menu.open {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="menu-btn">☰</div>
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="collectif.html">Le Collectif</a></li>
+        <li><a href="creations.html">Les Créations</a></li>
+        <li><a href="actualites.html">Actualités</a></li>
+        <li><a href="equipe.html">L'Équipe</a></li>
+        <li><a href="presse.html">Presse</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Le Collectif</h1>
+    <div class="image-container">
+      <img src="collectif_image.jpg" alt="Photo du Collectif OFBPC">
+    </div>
+    <p>
+      Le Collectif On Finira Bien Par Comprendre (anciennement Collectif Inconstance) naît en 2022 lors de la création du spectacle
+      <i>Illusions</i> d'Ivan Viripaev. C’est une femme qui nous rassemble : Agnès Adam, professeur au Conservatoire du 8e arrondissement
+      de Paris puis au CNSAD. Rapidement, nous avons eu le désir de poursuivre cet enseignement en commun et de continuer à travailler et
+      créer ensemble, avec un théâtre physique et ludique.
+    </p>
+    <p>
+      Il part toujours des acteurs. Notre processus de travail consiste à ouvrir par le plateau tout le paysage intérieur, l’imaginaire,
+      l’esthétique, ou encore le langage. Le texte n’arrive qu’en dernière instance. Le processus de création est fondamental. Notre
+      théâtre est ludique, il s’articule autour du « jeu ». Jouer à jouer, s’amuser à ébranler les codes théâtraux, casser les barrières,
+      questionner la place du public.
+    </p>
+    <p>
+      Nous prétendons à un théâtre total. Nous questionnons ce qui fait art. Qu’est-ce qu’être artiste ? Nous accordons beaucoup de place à
+      l’artisanat, au « fait main ». Ne pas cacher les artifices du théâtre, mais jouer avec. Nous voulons revenir à l’origine de ce qui
+      fait pour nous le théâtre : croire aux histoires, à ce qu’on nous raconte ou ce qu’on se raconte. Qu’est-ce que croire, en quoi et
+      comment croyons-nous ? Pour nous, le théâtre c’est l’art de croire, de faire croire, et de ne pas croire. Nous pensons que c’est en
+      construisant notre art théâtral que nous pourrons faire émerger un théâtre nouveau, le nôtre.
+    </p>
+    <p>
+      Nous revendiquons un théâtre qui ait une visée aussi bien artistique que « sociétale » puisque notre désir est également de nous
+      produire in situ, dans les campagnes et hors les murs, afin d’intégrer les publics dans chacune de nos mises en scène. En nous
+      imprégnant de l’intérieur d’une maison de famille, de la géographie d’un village, de la vie de ses habitants par exemple et créer une
+      nouvelle forme à partir de cela. Être au plus proche des spectateurs et les intégrer est un de moteurs principaux de mise en scène et
+      de scénographie d’<i>Illusions</i> par exemple.
+    </p>
+    <p>
+      La volonté du Collectif OFBPC est de réaliser une création théâtrale par an. Ce n’est pas seulement un collectif de théâtre, mais
+      aussi de cinéma. L’utilisation de la vidéo est très importante dans nos étapes de création mais nous réalisons également des films.
+      Le premier a été réalisé en 2023, et est une adaptation cinématographique de <i>La Mouette</i> de Tchekhov.
+    </p>
+    <br>
+    <a href="index.html">Retour à l'accueil</a>
+  </div>
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      document.querySelector(".menu-btn").addEventListener("click", function() {
+          document.querySelector(".menu").classList.toggle("open");
+      });
+  });
+</script>
+</html>

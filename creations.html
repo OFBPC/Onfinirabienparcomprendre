@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les Créations - OFBPC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Montserrat', sans-serif; color: #fff; background: #000; text-align: center; padding: 50px; }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; margin-top: 30px; }
+    p { max-width: 800px; margin: 20px auto; font-size: 1.2rem; text-align: justify; }
+    a { color: #FFD700; text-decoration: none; font-weight: bold; }
+    .container { max-width: 1000px; margin: auto; }
+    .image-container { margin: 30px auto; text-align: center; }
+    .image-container img { max-width: 80%; height: auto; border-radius: 10px; }
+  
+    /* Menu */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 15px 5px;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu-btn {
+      font-size: 24px;
+      cursor: pointer;
+      display: block;
+      color: white;
+    }
+
+    .menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: rgba(0,0,0,0.9);
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .menu ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .menu ul li {
+      margin: 10px 0;
+    }
+
+    .menu ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .menu.open {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="menu-btn">☰</div>
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="collectif.html">Le Collectif</a></li>
+        <li><a href="creations.html">Les Créations</a></li>
+        <li><a href="actualites.html">Actualités</a></li>
+        <li><a href="equipe.html">L'Équipe</a></li>
+        <li><a href="presse.html">Presse</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Les Créations</h1>
+    
+    <a href="#spectacles-diffusion">Spectacles en Diffusion</a> | 
+    <a href="#spectacles-creation">Spectacles en Création</a>
+    
+    <h2 id="spectacles-diffusion">Spectacles en Diffusion</h2>
+    <div class="image-container">
+      <img src="affiche_illusion.jpg" alt="Illusions d'Ivan Viripaev">
+    </div>
+    <p><strong>Illusions de Ivan Viripaev</strong></p>
+    <p><strong>Mis en scène par Lior Aidan</strong><br>Assistée de Ferdinand Mochot<br>
+      Avec Lior Aidan, Maxime Allègre, Charles Montélimard, Laura Opsomer Mironov</p>
+    <p>
+      <i>Illusions</i> de Ivan Viripaev est la première création du Collectif. À travers un texte qui questionne l’existence, les trajectoires de vie, la vérité, l’amour et la vocation, ce sont cinq artistes qui se sont retrouvés et ont eu l’envie de porter ces sujets au plateau.
+    </p>
+<a href="illusions.html">En savoir plus</a>
+
+    
+    <h2 id="spectacles-creation">Spectacles en Création</h2>
+    <div class="image-container">
+      <img src="silence_is_death.jpg" alt="Silence is Death">
+    </div>
+    <p><strong>Silence is Death</strong></p>
+    <p><strong>D’après les œuvres de John Cassavetes</strong><br>
+      Mis en scène par Ferdinand Mochot<br>
+      Avec Lior Aidan, Antoine Aubert, Athénaé Maso, Charles Montélimard, Laura Opsomer Mironov</p>
+    <p><strong>CRÉATION AUTOMNE 2025</strong></p>
+    <p>
+      <i>Silence is Death</i> est une adaptation d’œuvres cinématographiques de John Cassavetes mêlée à de l’écriture personnelle. Cette pièce aborde de multiples questions comme la place de l’artiste, son influence et que reste-t-il lorsqu’il disparaît, pour ses collaborateurs et ses spectateurs ?
+    </p>
+<a href="silence-is-death.html">En savoir plus</a>
+    
+    <div class="image-container">
+      <img src="tragedie_enfants_perdus.jpg" alt="La Tragédie des Enfants Perdus">
+    </div>
+    <p><strong>La Tragédie des Enfants Perdus</strong></p>
+    <p><strong>Mis en scène par Maxime Allègre</strong><br>
+      Assisté de Victor Fisbach<br>
+      Avec Lior Aidan, Athénaé Maso, Ferdinand Mochot, Charles Montélimard, Laura Opsomer Mironov</p>
+    <p><strong>CRÉATION 2025/2026</strong></p>
+    <p>
+      <i>La Tragédie des Enfants Perdus</i> (très librement inspirée par l’oeuvre de J.M Barrie), aborde la question du temps qui passe et d’une enfance qui se perd.
+    </p>
+<a href="tragedie-enfants-perdus.html">En savoir plus</a>
+    
+    <br>
+    <a href="index.html">Retour à l'accueil</a>
+  </div>
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      document.querySelector(".menu-btn").addEventListener("click", function() {
+          document.querySelector(".menu").classList.toggle("open");
+      });
+  });
+</script>
+</html>

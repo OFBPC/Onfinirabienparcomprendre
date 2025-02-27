@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collectif OFBPC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', sans-serif; color: #fff; background: #000; }
+    
+    /* Navigation */
+    header { position: fixed; width: 100%; top: 0; left: 0; background: rgba(0, 0, 0, 0.7); padding: 15px 20px; z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+    .menu-btn { font-size: 24px; cursor: pointer; display: block; color: white; }
+    .menu { display: none; position: absolute; top: 60px; right: 20px; background: rgba(0,0,0,0.8); padding: 10px; border-radius: 5px; }
+    .menu ul { list-style: none; }
+    .menu ul li { margin: 10px 0; }
+    .menu ul li a { color: #fff; text-decoration: none; }
+    
+    /* Slideshow */
+    .slideshow { position: relative; height: 100vh; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+    .slide { position: absolute; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease-in-out; }
+    .slide.active { opacity: 1; }
+    .hero-content { position: absolute; text-align: center; color: white; font-size: 2.5rem; font-weight: bold; }
+    
+    /* Section */
+    section { min-height: 100vh; padding: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    h2 { font-size: 2.5rem; margin-bottom: 20px; }
+    p { max-width: 800px; text-align: center; font-size: 1.2rem; }
+  </style>
+</head>
+<body>
+<header>
+    <div class="menu-btn">☰</div>
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="collectif.html">Le Collectif</a></li>
+        <li><a href="creations.html">Les Créations</a></li>
+        <li><a href="actualites.html">Actualités</a></li>
+        <li><a href="equipe.html">L'Équipe</a></li>
+        <li><a href="presse.html">Presse</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+</header>
+  
+  <section id="accueil" class="slideshow">
+   <div class="slide active" style="background-image: url('01- Illusions.jpg');"></div>
+    <div class="slide" style="background-image: url('09- Illusions.jpg');"></div>
+    <div class="slide" style="background-image: url('11- Illusions.jpg');"></div>
+    <div class="hero-content">
+      <h1>Collectif On Finira Bien Par Comprendre</h1>
+    </div>
+  </section>
+  
+  <section id="collectif">
+    <h2>Le Collectif</h2>
+    <p>Le Collectif On finira bien par comprendre naît en 2022 lors de la création du spectacle <i>Illusions</i> d'Ivan Viripaev. Le collectif s’articule autour d’un théâtre physique et ludique, questionnant la place du spectateur et les codes de la représentation.</p>
+    <a href="collectif.html">En savoir plus</a>
+  </section>
+  
+ <section id="Actualités">
+    <h2>Actualités</h2>
+    <p>Découvrez les actualités du Collectif On finira bien par comprendre.</p>
+    <a href="actualites.html">En savoir plus</a>
+  </section> 
+
+  <section id="creations">
+    <h2>Les Créations</h2>
+    <h3>Spectacles en Diffusion</h3>
+    <p><i>Illusions</i> d’Ivan Viripaev explore la quête de vérité à travers les récits croisés de deux couples âgés. La mise en scène met en avant la jeunesse des narrateurs et leur rapport au récit.</p>
+    <h3>Spectacles en Création</h3>
+    <p><i>Silence is Death</i> est une réflexion sur la mémoire artistique et l’influence des créateurs, inspirée des œuvres de John Cassavetes. <i>La Tragédie des Enfants Perdus</i> questionne le passage de l’enfance à l’âge adulte et la disparition progressive du jeu et de l’imaginaire.</p>
+    <a href="creations.html">Découvrir nos créations</a>
+  </section>
+
+ <section id="L'équipe">
+    <h2>L'équipe</h2>
+    <p>Les artistes derrière les projets.</p>
+    <a href="equipe.html">En savoir plus</a>
+  </section> 
+
+ <section id="Presse">
+    <h2>Presse</h2>
+    <p>Nos apparitions dans les médias.</p>
+    <a href="presse.html">En savoir plus</a>
+  </section> 
+  
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email : <a href="mailto:collectifofbpc@gmail.com">collectifofbpc@gmail.com</a></p>
+    <p><strong>Camille Doucet - Chargée de diffusion</strong></p>
+    <p>Email : <a href="mailto:cdoucetdiffusion@gmail.com">cdoucetdiffusion@gmail.com</a></p>
+    <p>Téléphone : +33 (0)6 10 37 04 95</p>
+  </section>
+  
+  <script>
+    $(document).ready(function(){
+      $('.menu-btn').click(function(){ $('.menu').toggle(); });
+      
+      let slides = $('.slide');
+      let index = 0;
+      setInterval(function() {
+        slides.eq(index).removeClass('active');
+        index = (index + 1) % slides.length;
+        slides.eq(index).addClass('active');
+      }, 5000);
+    });
+  </script>
+</body>
+</html>

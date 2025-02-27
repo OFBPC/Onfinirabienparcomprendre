@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualités - OFBPC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Montserrat', sans-serif; color: #fff; background: #000; text-align: center; padding: 50px; }
+    h1 { font-size: 2.5rem; }
+    p { max-width: 800px; margin: 20px auto; font-size: 1.2rem; text-align: justify; }
+    a { color: #FFD700; text-decoration: none; font-weight: bold; }
+    .container { max-width: 1000px; margin: auto; }
+    .image-container { margin: 30px auto; text-align: center; }
+    .image-container img { max-width: 80%; height: auto; border-radius: 10px; }
+img { width: 100%; max-width: 800px; margin-top: 20px; }
+    
+    /* Menu */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 15px 5px;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu-btn {
+      font-size: 24px;
+      cursor: pointer;
+      display: block;
+      color: white;
+    }
+
+    .menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: rgba(0,0,0,0.9);
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .menu ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .menu ul li {
+      margin: 10px 0;
+    }
+
+    .menu ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .menu.open {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="menu-btn">☰</div>
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="collectif.html">Le Collectif</a></li>
+        <li><a href="creations.html">Les Créations</a></li>
+        <li><a href="actualites.html">Actualités</a></li>
+        <li><a href="equipe.html">L'Équipe</a></li>
+        <li><a href="presse.html">Presse</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Actualités</h1>
+    <div class="image-container">
+      <img src="festival_avignon.jpg" alt="Illusions au Festival Avignon OFF 2025">
+    </div>
+    <p>
+      Nous avons le plaisir d'annoncer que notre spectacle <i>Illusions</i> d'Ivan Viripaev sera présenté au Théâtre du Train Bleu
+      pour le Festival Avignon OFF 2025. Plus d'informations à venir !
+    </p>
+    <br>
+    <a href="index.html">Retour à l'accueil</a>
+  </div>
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      document.querySelector(".menu-btn").addEventListener("click", function() {
+          document.querySelector(".menu").classList.toggle("open");
+      });
+  });
+</script>
+</html>
