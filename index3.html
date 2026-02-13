@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Collectif OFBPC</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+font-family:Inter,sans-serif;
+background:#f7f6f3;
+color:#111;
+line-height:1.5;
+}
+
+/* HEADER */
+
+header{
+position:fixed;
+top:0;
+width:100%;
+padding:25px 40px;
+display:flex;
+justify-content:space-between;
+z-index:1000;
+background:rgba(247,246,243,.9);
+backdrop-filter:blur(6px);
+}
+
+.menu-btn{
+font-size:20px;
+cursor:pointer;
+}
+
+.menu{
+display:none;
+position:absolute;
+top:70px;
+right:40px;
+background:#111;
+padding:20px 30px;
+}
+
+.menu a{
+color:white;
+text-decoration:none;
+display:block;
+margin:10px 0;
+}
+
+/* HERO */
+
+.slideshow{
+height:100vh;
+position:relative;
+}
+
+.slide{
+position:absolute;
+inset:0;
+background-size:cover;
+background-position:center;
+opacity:0;
+transition:opacity 1s;
+}
+
+.slide.active{opacity:1}
+
+.hero-content{
+position:absolute;
+bottom:80px;
+left:60px;
+max-width:600px;
+color:white;
+}
+
+.hero-content h1{
+font-family:"Playfair Display",serif;
+font-size:3rem;
+}
+
+/* SECTIONS */
+
+section{
+padding:140px 15vw;
+border-top:1px solid #ddd;
+}
+
+h2{
+font-size:2.2rem;
+margin-bottom:30px;
+font-weight:500;
+}
+
+h3{
+margin:25px 0 10px;
+font-weight:500;
+}
+
+p{
+max-width:700px;
+margin-bottom:15px;
+}
+
+a{
+color:#111;
+border-bottom:1px solid #111;
+text-decoration:none;
+padding-bottom:2px;
+}
+
+a:hover{opacity:.6}
+
+/* CONTACT */
+
+#contact p{margin-bottom:8px}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+section{padding:120px 40px}
+
+.hero-content{
+left:30px;
+right:30px;
+bottom:60px;
+}
+
+.hero-content h1{font-size:2.2rem}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="menu-btn">MENU</div>
+<nav class="menu">
+<a href="index.html">Accueil</a>
+<a href="collectif.html">Le Collectif</a>
+<a href="creations.html">Les Créations</a>
+<a href="actualites.html">Actualités</a>
+<a href="equipe.html">L'Équipe</a>
+<a href="presse.html">Presse</a>
+<a href="contact.html">Contact</a>
+</nav>
+</header>
+
+<section class="slideshow">
+
+<div class="slide active" style="background-image:url('01-%20Illusions.jpg')"></div>
+<div class="slide" style="background-image:url('09-%20Illusions.jpg')"></div>
+<div class="slide" style="background-image:url('11-%20Illusions.jpg')"></div>
+<div class="slide" style="background-image:url('20-%20Illusions.jpg')"></div>
+<div class="slide" style="background-image:url('33-%20Illusions.jpg')"></div>
+<div class="slide" style="background-image:url('35-%20Illusions.jpg')"></div>
+
+<div class="hero-content">
+<h1>Collectif On Finira Bien Par Comprendre</h1>
+</div>
+
+</section>
+
+<section>
+<h2>Le Collectif</h2>
+<p>Le Collectif On finira bien par comprendre naît en 2022 lors de la création du spectacle <i>Illusions</i> d'Ivan Viripaev. Le collectif s’articule autour d’un théâtre physique et ludique, questionnant la place du spectateur et les codes de la représentation.</p>
+<a href="collectif.html">En savoir plus</a>
+</section>
+
+<section>
+<h2>Actualités</h2>
+<p>Découvrez les actualités du Collectif On finira bien par comprendre.</p>
+<a href="actualites.html">En savoir plus</a>
+</section>
+
+<section>
+<h2>Les Créations</h2>
+
+<h3>Spectacles en diffusion</h3>
+<p><i>Illusions</i> d’Ivan Viripaev explore la quête de vérité à travers les récits croisés de deux couples âgés.</p>
+
+<h3>Spectacles en création</h3>
+<p><i>Silence is Death</i> est une réflexion sur la mémoire artistique. <i>Les Naufragés</i> questionne le passage de l’enfance à l’âge adulte.</p>
+
+<a href="creations.html">Découvrir nos créations</a>
+</section>
+
+<section>
+<h2>L'équipe</h2>
+<p>Les artistes derrière les projets.</p>
+<a href="equipe.html">En savoir plus</a>
+</section>
+
+<section>
+<h2>Presse</h2>
+<p>Nos apparitions dans les médias.</p>
+<a href="presse.html">En savoir plus</a>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+
+<p>Email : <a href="mailto:collectifofbpc@gmail.com">collectifofbpc@gmail.com</a></p>
+<p><strong>Camille Doucet – Chargée de diffusion</strong></p>
+<p>Email : <a href="mailto:cdoucetdiffusion@gmail.com">cdoucetdiffusion@gmail.com</a></p>
+<p>Téléphone : +33 (0)6 10 37 04 95</p>
+
+</section>
+
+<script>
+
+$('.menu-btn').click(()=>$('.menu').toggle());
+
+let slides=$('.slide'),i=0;
+
+setInterval(()=>{
+slides.eq(i).removeClass('active');
+i=(i+1)%slides.length;
+slides.eq(i).addClass('active');
+},5000);
+
+</script>
+
+</body>
+</html>
