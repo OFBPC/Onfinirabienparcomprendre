@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Collectif — OFBPC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --noir: #0a0a0a;
+      --blanc: #fafafa;
+      --accent: #ff4444;
+      --gris: #888888;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Work Sans', sans-serif;
+      color: var(--noir);
+      background: var(--blanc);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAVIGATION */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 1px;
+      color: var(--noir);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .menu-toggle {
+      cursor: pointer;
+      width: 30px;
+      height: 20px;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--noir);
+      margin: 7px 0;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: var(--noir);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+      z-index: 999;
+    }
+
+    nav.active {
+      right: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      text-align: center;
+    }
+
+    nav ul li {
+      margin: 30px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+
+    nav.active ul li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    nav.active ul li:nth-child(1) { transition-delay: 0.1s; }
+    nav.active ul li:nth-child(2) { transition-delay: 0.15s; }
+    nav.active ul li:nth-child(3) { transition-delay: 0.2s; }
+    nav.active ul li:nth-child(4) { transition-delay: 0.25s; }
+    nav.active ul li:nth-child(5) { transition-delay: 0.3s; }
+    nav.active ul li:nth-child(6) { transition-delay: 0.35s; }
+    nav.active ul li:nth-child(7) { transition-delay: 0.4s; }
+
+    nav ul li a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 60px;
+      color: var(--blanc);
+      text-decoration: none;
+      letter-spacing: 2px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: var(--accent);
+    }
+
+    /* PAGE HERO AVEC IMAGE */
+    .page-hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--noir);
+    }
+
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('collectif_image.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.3;
+      animation: slowZoom 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes slowZoom {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(10, 10, 10, 0.8) 0%, rgba(255, 68, 68, 0.3) 100%);
+      mix-blend-mode: multiply;
+    }
+
+    .page-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(60px, 12vw, 180px);
+      letter-spacing: 8px;
+      line-height: 1;
+      animation: fadeInUp 1s ease-out;
+      position: relative;
+      z-index: 2;
+      color: var(--blanc);
+      text-align: center;
+      padding: 0 50px;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* SCROLL INDICATOR */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 1s forwards, bounce 2s ease-in-out 2s infinite;
+    }
+
+    .scroll-indicator span {
+      display: block;
+      width: 2px;
+      height: 50px;
+      background: var(--blanc);
+      margin: 0 auto 10px;
+    }
+
+    .scroll-indicator p {
+      font-size: 12px;
+      color: var(--blanc);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+    }
+
+    /* CONTENT SECTION */
+    .content-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 50px;
+      position: relative;
+    }
+
+    /* GRANDE CITATION EN FILIGRANE */
+    .section-watermark {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(80px, 15vw, 200px);
+      color: rgba(0, 0, 0, 0.02);
+      letter-spacing: 10px;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .text-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .text-content p {
+      font-size: clamp(16px, 2vw, 19px);
+      line-height: 1.9;
+      margin-bottom: 35px;
+      font-weight: 300;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .text-content p:nth-child(1) { animation-delay: 0.1s; }
+    .text-content p:nth-child(2) { animation-delay: 0.2s; }
+    .text-content p:nth-child(3) { animation-delay: 0.3s; }
+    .text-content p:nth-child(4) { animation-delay: 0.4s; }
+    .text-content p:nth-child(5) { animation-delay: 0.5s; }
+    .text-content p:nth-child(6) { animation-delay: 0.6s; }
+
+    .text-content p em,
+    .text-content p i {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    /* QUOTE HIGHLIGHT */
+    .quote-highlight {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(30px, 4vw, 50px);
+      letter-spacing: 2px;
+      text-align: center;
+      margin: 80px auto;
+      padding: 60px 40px;
+      background: var(--noir);
+      color: var(--blanc);
+      max-width: 900px;
+      line-height: 1.3;
+      animation: fadeIn 1s ease-out 0.5s both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-highlight::before {
+      content: '"';
+      position: absolute;
+      top: -20px;
+      left: 20px;
+      font-size: 150px;
+      color: var(--accent);
+      opacity: 0.2;
+      font-family: Georgia, serif;
+    }
+
+    /* BACK LINK */
+    .back-link {
+      display: inline-block;
+      margin: 80px auto 0;
+      padding: 15px 40px;
+      background: var(--noir);
+      color: var(--blanc);
+      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      border: 2px solid var(--noir);
+      text-align: center;
+      display: block;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .back-link:hover {
+      background: transparent;
+      color: var(--noir);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header {
+        padding: 20px 30px;
+      }
+
+      nav ul li a {
+        font-size: 40px;
+      }
+
+      .page-hero {
+        min-height: 60vh;
+      }
+
+      .page-hero h1 {
+        font-size: clamp(50px, 10vw, 100px);
+      }
+
+      .content-section {
+        padding: 60px 30px;
+      }
+
+      .section-watermark {
+        font-size: clamp(60px, 12vw, 120px);
+      }
+
+      .quote-highlight {
+        margin: 60px auto;
+        padding: 40px 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">OFBPC</a>
+    <div class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="collectif.html">Le Collectif</a></li>
+      <li><a href="creations.html">Les Créations</a></li>
+      <li><a href="actualites.html">Actualités</a></li>
+      <li><a href="equipe.html">L'Équipe</a></li>
+      <li><a href="presse.html">Presse</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO AVEC IMAGE EN FOND -->
+  <section class="page-hero">
+    <div class="hero-image"></div>
+    <div class="hero-overlay"></div>
+    <h1>Le Collectif</h1>
+    <div class="scroll-indicator">
+      <span></span>
+      <p>Défiler</p>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="content-section">
+    <span class="section-watermark">OFBPC</span>
+    
+    <div class="text-content">
+      <p>
+        Le Collectif On Finira Bien Par Comprendre (anciennement Collectif Inconstance) naît en 2022 lors de la création du spectacle
+        <i>Illusions</i> d'Ivan Viripaev. C'est une femme qui nous rassemble : Agnès Adam, professeur au Conservatoire du 8e arrondissement
+        de Paris puis au CNSAD. Rapidement, nous avons eu le désir de poursuivre cet enseignement en commun et de continuer à travailler et
+        créer ensemble, avec un théâtre physique et ludique.
+      </p>
+
+      <p>
+        Il part toujours des acteurs. Notre processus de travail consiste à ouvrir par le plateau tout le paysage intérieur, l'imaginaire,
+        l'esthétique, ou encore le langage. Le texte n'arrive qu'en dernière instance. Le processus de création est fondamental. Notre
+        théâtre est ludique, il s'articule autour du « jeu ». Jouer à jouer, s'amuser à ébranler les codes théâtraux, casser les barrières,
+        questionner la place du public.
+      </p>
+
+      <div class="quote-highlight">
+        Nous prétendons à un théâtre total. Nous questionnons ce qui fait art.
+      </div>
+
+      <p>
+        Qu'est-ce qu'être artiste ? Nous accordons beaucoup de place à l'artisanat, au « fait main ». Ne pas cacher les artifices du théâtre, mais jouer avec. Nous voulons revenir à l'origine de ce qui
+        fait pour nous le théâtre : croire aux histoires, à ce qu'on nous raconte ou ce qu'on se raconte. Qu'est-ce que croire, en quoi et
+        comment croyons-nous ? Pour nous, le théâtre c'est l'art de croire, de faire croire, et de ne pas croire. Nous pensons que c'est en
+        construisant notre art théâtral que nous pourrons faire émerger un théâtre nouveau, le nôtre.
+      </p>
+
+      <p>
+        Nous revendiquons un théâtre qui ait une visée aussi bien artistique que « sociétale » puisque notre désir est également de nous
+        produire in situ, dans les campagnes et hors les murs, afin d'intégrer les publics dans chacune de nos mises en scène. En nous
+        imprégnant de l'intérieur d'une maison de famille, de la géographie d'un village, de la vie de ses habitants par exemple et créer une
+        nouvelle forme à partir de cela. Être au plus proche des spectateurs et les intégrer est un de moteurs principaux de mise en scène et
+        de scénographie d'<i>Illusions</i> par exemple.
+      </p>
+
+      <p>
+        La volonté du Collectif OFBPC est de réaliser une création théâtrale par an. Ce n'est pas seulement un collectif de théâtre, mais
+        aussi de cinéma. L'utilisation de la vidéo est très importante dans nos étapes de création mais nous réalisons également des films.
+        Le premier a été réalisé en 2023, et est une adaptation cinématographique de <i>La Mouette</i> de Tchekhov.
+      </p>
+    </div>
+
+    <a href="index.html" class="back-link">Retour à l'accueil</a>
+  </section>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+
+    // Fermer le menu quand on clique sur un lien
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        nav.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
