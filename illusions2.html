@@ -148,7 +148,7 @@
     /* HERO IMAGE */
     .hero {
       position: relative;
-      height: 85vh;
+      height: 70vh;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -217,30 +217,130 @@
       }
     }
 
-    /* CONTENT SECTION */
-    .content-section {
+    /* DATES SECTION - ÉLÉGANT */
+    .dates-highlight {
+      background: var(--noir);
+      color: var(--blanc);
+      padding: 80px 50px;
+      position: relative;
+    }
+
+    .dates-highlight-content {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 100px 50px;
+    }
+
+    .dates-highlight h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(45px, 7vw, 70px);
+      letter-spacing: 4px;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    .dates-highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+    }
+
+    .date-highlight-card {
+      background: var(--blanc);
+      color: var(--noir);
+      padding: 50px 40px;
+      transition: all 0.3s ease;
+      text-align: center;
+      border: 3px solid var(--blanc);
+    }
+
+    .date-highlight-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(255, 68, 68, 0.3);
+      border-color: var(--accent);
+    }
+
+    .date-highlight-card .date {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(32px, 4.5vw, 45px);
+      letter-spacing: 3px;
+      margin-bottom: 15px;
+      color: var(--accent);
+    }
+
+    .date-highlight-card .venue {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--noir);
+    }
+
+    .date-highlight-card .location {
+      font-size: 15px;
+      color: var(--gris);
+    }
+
+    /* DATES PASSÉES */
+    .dates-history-section {
+      background: var(--noir);
+      color: var(--blanc);
+      padding: 0 50px 80px;
+    }
+
+    .dates-history-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .dates-history-content h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+      text-align: center;
+      color: #bbb;
+    }
+
+    .history-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .history-item {
+      font-size: 14px;
+      color: #999;
+      padding: 10px 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* SPLIT LAYOUT SECTION */
+    .split-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+    }
+
+    /* LEFT SIDE - CONTENT */
+    .left-content {
+      background: var(--blanc);
+      padding: 100px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .content-block {
-      margin-bottom: 80px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.8s ease-out forwards;
+      margin-bottom: 60px;
     }
-
-    .content-block:nth-child(1) { animation-delay: 0.1s; }
-    .content-block:nth-child(2) { animation-delay: 0.2s; }
-    .content-block:nth-child(3) { animation-delay: 0.3s; }
-    .content-block:nth-child(4) { animation-delay: 0.4s; }
 
     .content-block h2 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(40px, 6vw, 60px);
+      font-size: clamp(35px, 5vw, 50px);
       letter-spacing: 3px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       position: relative;
       display: inline-block;
     }
@@ -248,17 +348,17 @@
     .content-block h2::after {
       content: '';
       position: absolute;
-      bottom: -10px;
+      bottom: -8px;
       left: 0;
-      width: 50px;
+      width: 40px;
       height: 3px;
       background: var(--accent);
     }
 
     .content-block p {
-      font-size: clamp(16px, 2vw, 18px);
-      line-height: 1.9;
-      margin-bottom: 20px;
+      font-size: clamp(15px, 1.8vw, 17px);
+      line-height: 1.8;
+      margin-bottom: 18px;
       font-weight: 300;
       color: #333;
     }
@@ -268,12 +368,165 @@
       font-style: italic;
     }
 
+    /* RIGHT SIDE - GALLERY */
+    .right-gallery {
+      background: var(--noir);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 40px;
+    }
+
+    .gallery-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(30px, 4vw, 45px);
+      letter-spacing: 3px;
+      color: var(--blanc);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: #000;
+      margin-bottom: 20px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .carousel-slide {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+      height: 100%;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--blanc);
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .carousel-nav:hover {
+      background: rgba(255, 68, 68, 0.9);
+      border-color: var(--accent);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .prev { left: 15px; }
+    .next { right: 15px; }
+
+    .carousel-counter {
+      text-align: center;
+      color: var(--blanc);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: 2px;
+      margin-top: 15px;
+    }
+
+    .carousel-counter .current {
+      color: var(--accent);
+    }
+
+    .thumbnail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .thumbnail {
+      aspect-ratio: 3/2;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(40%) brightness(0.6);
+      transition: all 0.4s ease;
+    }
+
+    .thumbnail:hover img {
+      filter: grayscale(0%) brightness(1);
+      transform: scale(1.05);
+    }
+
+    .thumbnail.active {
+      border-color: var(--accent);
+    }
+
+    .thumbnail.active img {
+      filter: grayscale(0%) brightness(1);
+    }
+
     /* TEAM GRID */
+    .team-section {
+      background: var(--blanc);
+      padding: 100px 60px;
+    }
+
+    .team-section h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 60px);
+      letter-spacing: 3px;
+      margin-bottom: 50px;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .team-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: var(--accent);
+    }
+
     .team-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 30px;
-      margin-top: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .team-item {
@@ -305,100 +558,12 @@
       color: #555;
     }
 
-    /* DATES SECTION */
-    .dates-section {
-      background: var(--noir);
-      color: var(--blanc);
-      padding: 80px 50px;
-    }
-
-    .dates-content {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .dates-content h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(40px, 6vw, 60px);
-      letter-spacing: 3px;
-      margin-bottom: 40px;
-      text-align: center;
-    }
-
-    .dates-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-bottom: 50px;
-    }
-
-    .date-card {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 30px;
-      border-left: 4px solid var(--accent);
-      transition: all 0.3s ease;
-    }
-
-    .date-card:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-5px);
-    }
-
-    .date-card .date {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 2px;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
-
-    .date-card .venue {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .date-card .location {
-      font-size: 15px;
-      color: #bbb;
-    }
-
-    .dates-history {
-      margin-top: 60px;
-      padding-top: 40px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .dates-history h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 24px;
-      letter-spacing: 2px;
-      margin-bottom: 20px;
-      text-align: center;
-      color: #bbb;
-    }
-
-    .history-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    .history-item {
-      font-size: 14px;
-      color: #999;
-      padding: 8px 15px;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 20px;
-    }
-
     /* BUTTONS */
     .btn-container {
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
-      margin-top: 40px;
+      padding: 80px 60px;
       justify-content: center;
     }
 
@@ -434,6 +599,22 @@
     }
 
     /* RESPONSIVE */
+    @media (max-width: 1200px) {
+      .split-section {
+        grid-template-columns: 1fr;
+      }
+
+      .right-gallery {
+        position: relative;
+        height: auto;
+        min-height: 80vh;
+      }
+
+      .left-content {
+        padding: 80px 40px;
+      }
+    }
+
     @media (max-width: 768px) {
       header {
         padding: 20px 30px;
@@ -444,14 +625,30 @@
       }
 
       .hero {
-        height: 70vh;
+        height: 60vh;
       }
 
-      .content-section {
+      .dates-highlight {
         padding: 60px 30px;
       }
 
-      .dates-section {
+      .dates-highlight-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dates-history-section {
+        padding: 0 30px 60px;
+      }
+
+      .left-content {
+        padding: 60px 30px;
+      }
+
+      .right-gallery {
+        padding: 60px 30px;
+      }
+
+      .team-section {
         padding: 60px 30px;
       }
 
@@ -459,13 +656,15 @@
         grid-template-columns: 1fr;
       }
 
-      .dates-grid {
-        grid-template-columns: 1fr;
+      .thumbnail-grid {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+        gap: 6px;
       }
 
       .btn-container {
         flex-direction: column;
         align-items: stretch;
+        padding: 60px 30px;
       }
 
       .btn {
@@ -509,98 +708,157 @@
     </div>
   </section>
 
-  <!-- DATES À VENIR -->
-  <section class="dates-section">
-    <div class="dates-content">
+  <!-- DATES EN ÉVIDENCE (ÉLÉGANT) -->
+  <section class="dates-highlight">
+    <div class="dates-highlight-content">
       <h2>Prochaines dates</h2>
-      <div class="dates-grid">
-        <div class="date-card">
+      <div class="dates-highlight-grid">
+        <div class="date-highlight-card">
           <div class="date">8 Mai 2026</div>
           <div class="venue">Festival Coye la Forêt</div>
           <div class="location">Coye-la-Forêt</div>
         </div>
-        <div class="date-card">
+        <div class="date-highlight-card">
           <div class="date">Novembre 2026</div>
           <div class="venue">Piano'cktail</div>
           <div class="location">Théâtre de la Ville de Bouguenais</div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="dates-history">
-        <h3>Dates passées</h3>
-        <div class="history-list">
-          <span class="history-item">Novembre 2023 — Théâtre le Quai, Troyes</span>
-          <span class="history-item">Mai 2024 — Lavoir Moderne Parisien</span>
-          <span class="history-item">Novembre 2024 — Théâtre du Troisième Type</span>
-          <span class="history-item">Juillet 2025 — Festival d'Avignon OFF, Théâtre du Train Bleu</span>
-        </div>
+  <!-- DATES PASSÉES -->
+  <section class="dates-history-section">
+    <div class="dates-history-content">
+      <h3>Dates passées</h3>
+      <div class="history-list">
+        <span class="history-item">Novembre 2023 — Théâtre le Quai, Troyes</span>
+        <span class="history-item">Mai 2024 — Lavoir Moderne Parisien</span>
+        <span class="history-item">Novembre 2024 — Théâtre du Troisième Type</span>
+        <span class="history-item">Juillet 2025 — Festival d'Avignon OFF, Théâtre du Train Bleu</span>
       </div>
     </div>
   </section>
 
-  <!-- CONTENT -->
-  <section class="content-section">
+  <!-- SPLIT SECTION: CONTENT LEFT + GALLERY RIGHT -->
+  <section class="split-section">
     
-    <div class="content-block">
-      <h2>Présentation du spectacle</h2>
-      <p>
-        <em>Illusions</em> d'Ivan Viripaev est la première création du Collectif. À travers un texte qui questionne l'existence, les trajectoires de vie, la vérité, l'amour et la vocation, ce sont cinq artistes qui se sont retrouvés et ont eu l'envie de porter ces sujets au plateau.
-      </p>
-      <p>
-        Et si notre vie n'était qu'une illusion ? Et l'amour alors ? Après nous, que restera-t-il de nos vérités et de nos mensonges ? Ce sont ces questions qui animent les quatre narrateurs venus nous raconter l'histoire de Dennis, Sandra, Albert et Margaret, deux couples mariés à l'orée de leur mort. Le public est au plus proche des épisodes de vie et d'amour de ces couples, entre errances et épiphanies, animés par une quête de réponses et de vérité.
-      </p>
-      <p>
-        Le parti pris de mise en scène n'a pas été de représenter les personnes âgées dont l'histoire est question mais plutôt de mettre l'accent sur les jeunes qui la raconte. Le rapport des jeunes entre eux, leurs interactions, leur langage corporel raconte aussi une histoire. Une autre ? Peut être.
-      </p>
-      <p>
-        Tout notre travail a été de construire l'intériorité et les relations entre ces personnages jeunes, et leur lien avec l'histoire qu'ils racontent de manière ludique. Jouer avec la vérité des histoires racontées, s'amuser à les transformer, jouer à jouer avec les autres et avec les spectateurs. La notion de vérité est centrale, les personnages, les narrateurs, les acteurs et les spectateurs cherchent la vérité dans cette histoire. Mais celle-ci ne se retrouve que dans la réalité de la représentation.
-      </p>
-      <p>
-        La création a duré cinq semaines, dont trois au Théâtre le Quai à Troyes. Nous y avons joué les premières dates en Novembre 2023, puis en mai 2024 au Lavoir Moderne Parisien, en novembre 2024 au Théâtre du Troisième Type (Rémi Prin), et au Festival d'Avignon OFF au Théâtre du Train Bleu en juillet 2025. Une tournée est envisagée pour les saisons prochaines.
-      </p>
+    <!-- LEFT: CONTENT -->
+    <div class="left-content">
+      <div class="content-block">
+        <h2>Présentation</h2>
+        <p>
+          <em>Illusions</em> d'Ivan Viripaev est la première création du Collectif. À travers un texte qui questionne l'existence, les trajectoires de vie, la vérité, l'amour et la vocation, ce sont cinq artistes qui se sont retrouvés et ont eu l'envie de porter ces sujets au plateau.
+        </p>
+        <p>
+          Et si notre vie n'était qu'une illusion ? Et l'amour alors ? Après nous, que restera-t-il de nos vérités et de nos mensonges ? Ce sont ces questions qui animent les quatre narrateurs venus nous raconter l'histoire de Dennis, Sandra, Albert et Margaret, deux couples mariés à l'orée de leur mort.
+        </p>
+        <p>
+          Le parti pris de mise en scène n'a pas été de représenter les personnes âgées dont l'histoire est question mais plutôt de mettre l'accent sur les jeunes qui la racontent. Le rapport des jeunes entre eux, leurs interactions, leur langage corporel raconte aussi une histoire.
+        </p>
+        <p>
+          Tout notre travail a été de construire l'intériorité et les relations entre ces personnages jeunes, et leur lien avec l'histoire qu'ils racontent de manière ludique. Jouer avec la vérité des histoires racontées, s'amuser à les transformer, jouer à jouer avec les autres et avec les spectateurs.
+        </p>
+        <p>
+          La création a duré cinq semaines, dont trois au Théâtre le Quai à Troyes. Nous y avons joué les premières dates en Novembre 2023, puis en mai 2024 au Lavoir Moderne Parisien, en novembre 2024 au Théâtre du Troisième Type, et au Festival d'Avignon OFF au Théâtre du Train Bleu en juillet 2025.
+        </p>
+      </div>
     </div>
 
-    <div class="content-block">
-      <h2>Équipe artistique</h2>
-      <div class="team-grid">
-        <div class="team-item">
-          <strong>Traduction</strong>
-          <p>Tania Mogouilevskaia et Gilles Morel</p>
+    <!-- RIGHT: GALLERY (STICKY) -->
+    <div class="right-gallery">
+      <h3 class="gallery-title">Galerie photos</h3>
+      
+      <div class="carousel-container">
+        <button class="carousel-nav prev" onclick="moveSlide(-1)">‹</button>
+        <div class="carousel-slide"
+          <img src="01-%20Illusions.jpg" alt="Illusions">
+          <img src="09-%20Illusions.jpg" alt="Illusions">
+          <img src="11-%20Illusions.jpg" alt="Illusions">
+          <img src="13-%20Illusions.jpg" alt="Illusions">
+          <img src="16-%20Illusions.jpg" alt="Illusions">
+          <img src="29-%20Illusions.jpg" alt="Illusions">
         </div>
-        <div class="team-item">
-          <strong>Mise en scène</strong>
-          <p>Lior Aidan</p>
+        <button class="carousel-nav next" onclick="moveSlide(1)">›</button>
+      </div>
+
+      <div class="carousel-counter">
+        <span class="current">1</span> / <span class="total">9</span>
+      </div>
+
+      <div class="thumbnail-grid">
+        <div class="thumbnail active" onclick="setSlide(0)">
+          <img src="18-%20Illusions.jpg" alt="Illusions">
         </div>
-        <div class="team-item">
-          <strong>Assistant mise en scène</strong>
-          <p>Ferdinand Mochot</p>
+        <div class="thumbnail" onclick="setSlide(1)">
+          <img src="01-%20Illusions.jpg" alt="Illusions">
         </div>
-        <div class="team-item">
-          <strong>Création lumière</strong>
-          <p>Titouan Laporte</p>
+        <div class="thumbnail" onclick="setSlide(2)">
+          <img src="09-%20Illusions.jpg" alt="Illusions">
         </div>
-        <div class="team-item">
-          <strong>Aide costumes et scénographie</strong>
-          <p>Laura Opsomer</p>
+        <div class="thumbnail" onclick="setSlide(3)">
+          <img src="11-%20Illusions.jpg" alt="Illusions">
         </div>
-        <div class="team-item">
-          <strong>Production</strong>
-          <p>Collectif On finira bien par comprendre / Eclosion 13</p>
+        <div class="thumbnail" onclick="setSlide(4)">
+          <img src="13-%20Illusions.jpg" alt="Illusions">
         </div>
-        <div class="team-item">
-          <strong>Avec</strong>
-          <p>Lior Aidan, Maxime Allègre, Charles Montélimard, Laura Opsomer Mironov</p>
+        <div class="thumbnail" onclick="setSlide(5)">
+          <img src="16-%20Illusions.jpg" alt="Illusions">
+        </div>
+        <div class="thumbnail" onclick="setSlide(6)">
+          <img src="29-%20Illusions.jpg" alt="Illusions">
+        </div>
+        <div class="thumbnail" onclick="setSlide(7)">
+          <img src="34-%20Illusions.jpg" alt="Illusions">
+        </div>
+        <div class="thumbnail" onclick="setSlide(8)">
+          <img src="37-%20Illusions.jpg" alt="Illusions">
         </div>
       </div>
     </div>
 
-    <div class="btn-container">
-      <a href="gallery2.html" class="btn">Voir la galerie</a>
-      <a href="creations.html" class="btn-outline">Retour aux créations</a>
-      <a href="index.html" class="btn-outline">Retour à l'accueil</a>
-    </div>
-
   </section>
+
+  <!-- TEAM -->
+  <section class="team-section">
+    <h2>Équipe artistique</h2>
+    <div class="team-grid">
+      <div class="team-item">
+        <strong>Traduction</strong>
+        <p>Tania Mogouilevskaia et Gilles Morel</p>
+      </div>
+      <div class="team-item">
+        <strong>Mise en scène</strong>
+        <p>Lior Aidan</p>
+      </div>
+      <div class="team-item">
+        <strong>Assistant mise en scène</strong>
+        <p>Ferdinand Mochot</p>
+      </div>
+      <div class="team-item">
+        <strong>Création lumière</strong>
+        <p>Titouan Laporte</p>
+      </div>
+      <div class="team-item">
+        <strong>Aide costumes et scénographie</strong>
+        <p>Laura Opsomer</p>
+      </div>
+      <div class="team-item">
+        <strong>Production</strong>
+        <p>Collectif On finira bien par comprendre / Eclosion 13</p>
+      </div>
+      <div class="team-item">
+        <strong>Avec</strong>
+        <p>Lior Aidan, Maxime Allègre, Charles Montélimard, Laura Opsomer Mironov</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <div class="btn-container">
+    <a href="creations.html" class="btn-outline">Retour aux créations</a>
+    <a href="index.html" class="btn-outline">Retour à l'accueil</a>
+  </div>
 
   <!-- JAVASCRIPT -->
   <script>
@@ -620,6 +878,51 @@
         nav.classList.remove('active');
       });
     });
+
+    // Carousel
+    let slideIndex = 0;
+    const slides = document.querySelector('.carousel-slide');
+    const images = document.querySelectorAll('.carousel-slide img');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    const currentCounter = document.querySelector('.carousel-counter .current');
+    const totalCounter = document.querySelector('.carousel-counter .total');
+    const totalSlides = images.length;
+
+    totalCounter.textContent = totalSlides;
+
+    function moveSlide(n) {
+      slideIndex = (slideIndex + n + totalSlides) % totalSlides;
+      updateSlide();
+    }
+
+    function setSlide(n) {
+      slideIndex = n;
+      updateSlide();
+    }
+
+    function updateSlide() {
+      const offset = -slideIndex * 100;
+      slides.style.transform = `translateX(${offset}%)`;
+      currentCounter.textContent = slideIndex + 1;
+      
+      // Update active thumbnail
+      thumbnails.forEach((thumb, index) => {
+        if (index === slideIndex) {
+          thumb.classList.add('active');
+        } else {
+          thumb.classList.remove('active');
+        }
+      });
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') moveSlide(-1);
+      if (e.key === 'ArrowRight') moveSlide(1);
+    });
+
+    // Initialize
+    updateSlide();
   </script>
 </body>
 </html>
