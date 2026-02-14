@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les Créations — OFBPC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --noir: #0a0a0a;
+      --blanc: #fafafa;
+      --accent: #ff4444;
+      --gris: #888888;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Work Sans', sans-serif;
+      color: var(--noir);
+      background: var(--blanc);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAVIGATION */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 1px;
+      color: var(--noir);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .menu-toggle {
+      cursor: pointer;
+      width: 30px;
+      height: 20px;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--noir);
+      margin: 7px 0;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: var(--noir);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+      z-index: 999;
+    }
+
+    nav.active {
+      right: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      text-align: center;
+    }
+
+    nav ul li {
+      margin: 30px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+
+    nav.active ul li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    nav.active ul li:nth-child(1) { transition-delay: 0.1s; }
+    nav.active ul li:nth-child(2) { transition-delay: 0.15s; }
+    nav.active ul li:nth-child(3) { transition-delay: 0.2s; }
+    nav.active ul li:nth-child(4) { transition-delay: 0.25s; }
+    nav.active ul li:nth-child(5) { transition-delay: 0.3s; }
+    nav.active ul li:nth-child(6) { transition-delay: 0.35s; }
+    nav.active ul li:nth-child(7) { transition-delay: 0.4s; }
+
+    nav ul li a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 60px;
+      color: var(--blanc);
+      text-decoration: none;
+      letter-spacing: 2px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: var(--accent);
+    }
+
+    /* PAGE HERO */
+    .page-hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--noir);
+      color: var(--blanc);
+      text-align: center;
+      padding: 150px 50px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 68, 68, 0.1) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .page-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(60px, 10vw, 140px);
+      letter-spacing: 5px;
+      line-height: 1;
+      animation: fadeInUp 1s ease-out;
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* QUICK LINKS */
+    .quick-links {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 50px 40px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .quick-link {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 2px;
+      color: var(--noir);
+      text-decoration: none;
+      padding: 10px 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .quick-link:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* SECTION TITLE */
+    .section-title {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 50px 60px;
+    }
+
+    .section-title h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(50px, 8vw, 80px);
+      letter-spacing: 3px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--accent);
+    }
+
+    /* CREATIONS GRID */
+    .creations-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 50px 100px;
+    }
+
+    .creation-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-bottom: 120px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+      position: relative;
+    }
+
+    .creation-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Alternance */
+    .creation-item:nth-child(even) {
+      grid-template-columns: 1.2fr 0.8fr;
+    }
+
+    .creation-item:nth-child(even) .creation-image {
+      order: 2;
+    }
+
+    .creation-item:nth-child(even) .creation-info {
+      order: 1;
+    }
+
+    /* IMAGE */
+    .creation-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .creation-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .creation-item:hover .creation-image img {
+      transform: scale(1.05);
+    }
+
+    /* INFO */
+    .creation-info {
+      padding-top: 20px;
+    }
+
+    .creation-info h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 5vw, 60px);
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+      line-height: 1.1;
+    }
+
+    .creation-subtitle {
+      font-size: 16px;
+      color: var(--gris);
+      font-style: italic;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .creation-credits {
+      margin-bottom: 25px;
+    }
+
+    .creation-credits p {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    .creation-credits strong {
+      color: var(--noir);
+      font-weight: 600;
+    }
+
+    .creation-status {
+      display: inline-block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: var(--accent);
+      background: rgba(255, 68, 68, 0.1);
+      padding: 8px 20px;
+      margin-bottom: 20px;
+    }
+
+    .creation-description {
+      font-size: 16px;
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .creation-link {
+      display: inline-block;
+      padding: 12px 30px;
+      background: var(--noir);
+      color: var(--blanc);
+      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      border: 2px solid var(--noir);
+    }
+
+    .creation-link:hover {
+      background: transparent;
+      color: var(--noir);
+      transform: translateY(-2px);
+    }
+
+    /* SEPARATEUR */
+    .creation-item::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    /* BACK LINK */
+    .back-link {
+      display: inline-block;
+      margin: 80px auto 0;
+      padding: 15px 40px;
+      background: var(--noir);
+      color: var(--blanc);
+      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      border: 2px solid var(--noir);
+      text-align: center;
+      display: block;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .back-link:hover {
+      background: transparent;
+      color: var(--noir);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* BACKGROUND SECTION */
+    .bg-dark {
+      background: var(--noir);
+      color: var(--blanc);
+    }
+
+    .bg-dark .section-title h2 {
+      color: var(--blanc);
+    }
+
+    .bg-dark .section-title h2::after {
+      background: var(--blanc);
+    }
+
+    .bg-dark .creation-info h3 {
+      color: var(--blanc);
+    }
+
+    .bg-dark .creation-description {
+      color: #ddd;
+    }
+
+    .bg-dark .creation-credits p {
+      color: #bbb;
+    }
+
+    .bg-dark .creation-credits strong {
+      color: var(--blanc);
+    }
+
+    .bg-dark .creation-link {
+      background: var(--blanc);
+      color: var(--noir);
+      border-color: var(--blanc);
+    }
+
+    .bg-dark .creation-link:hover {
+      background: transparent;
+      color: var(--blanc);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .creation-item,
+      .creation-item:nth-child(even) {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 20px 30px;
+      }
+
+      nav ul li a {
+        font-size: 40px;
+      }
+
+      .page-hero {
+        padding: 120px 30px 80px;
+        min-height: 50vh;
+      }
+
+      .quick-links {
+        padding: 40px 30px 20px;
+        gap: 20px;
+      }
+
+      .quick-link {
+        font-size: 16px;
+      }
+
+      .section-title {
+        padding: 60px 30px 40px;
+      }
+
+      .creations-section {
+        padding: 0 30px 60px;
+      }
+
+      .creation-item,
+      .creation-item:nth-child(even) {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-bottom: 80px;
+      }
+
+      .creation-item:nth-child(even) .creation-image {
+        order: 1;
+      }
+
+      .creation-item:nth-child(even) .creation-info {
+        order: 2;
+      }
+
+      .creation-info {
+        padding-top: 0;
+      }
+
+      .creation-item::after {
+        bottom: -40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">OFBPC</a>
+    <div class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="collectif.html">Le Collectif</a></li>
+      <li><a href="creations.html">Les Créations</a></li>
+      <li><a href="actualites.html">Actualités</a></li>
+      <li><a href="equipe.html">L'Équipe</a></li>
+      <li><a href="presse.html">Presse</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <h1>Les Créations</h1>
+  </section>
+
+  <!-- QUICK LINKS -->
+  <div class="quick-links">
+    <a href="#spectacles-diffusion" class="quick-link">Spectacles en Diffusion</a>
+    <a href="#spectacles-creation" class="quick-link">Spectacles en Création</a>
+  </div>
+
+  <!-- SPECTACLES EN DIFFUSION -->
+  <div id="spectacles-diffusion" class="section-title">
+    <h2>Spectacles en Diffusion</h2>
+  </div>
+
+  <section class="creations-section">
+    <div class="creation-item">
+      <div class="creation-image">
+        <img src="affiche_illusion.jpg" alt="Illusions d'Ivan Viripaev">
+      </div>
+      <div class="creation-info">
+        <h3>Illusions</h3>
+        <span class="creation-subtitle">D'Ivan Viripaev</span>
+        <div class="creation-credits">
+          <p><strong>Mis en scène par</strong> Lior Aidan</p>
+          <p><strong>Assistée de</strong> Ferdinand Mochot</p>
+          <p><strong>Avec</strong> Lior Aidan, Maxime Allègre, Charles Montélimard, Laura Opsomer Mironov</p>
+        </div>
+        <p class="creation-description">
+          <em>Illusions</em> de Ivan Viripaev est la première création du Collectif. À travers un texte qui questionne l'existence, les trajectoires de vie, la vérité, l'amour et la vocation, ce sont cinq artistes qui se sont retrouvés et ont eu l'envie de porter ces sujets au plateau.
+        </p>
+        <a href="illusions.html" class="creation-link">En savoir plus</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECTACLES EN CRÉATION -->
+  <div id="spectacles-creation" class="bg-dark">
+    <div class="section-title">
+      <h2>Spectacles en Création</h2>
+    </div>
+
+    <section class="creations-section">
+      <!-- LES NAUFRAGÉS -->
+      <div class="creation-item">
+        <div class="creation-image">
+          <img src="tragedie_enfants_perdus.jpg" alt="Les Naufragés">
+        </div>
+        <div class="creation-info">
+          <h3>Les Naufragés</h3>
+          <span class="creation-subtitle">Très librement inspiré de l'œuvre de J.M. Barrie</span>
+          <span class="creation-status">CRÉATION 2025/2026</span>
+          <div class="creation-credits">
+            <p><strong>Mis en scène par</strong> Maxime Allègre</p>
+            <p><strong>Assisté de</strong> Victor Fisbach</p>
+            <p><strong>Avec</strong> Lior Aidan, Athénaé Maso, Ferdinand Mochot, Charles Montélimard, Laura Opsomer Mironov</p>
+          </div>
+          <p class="creation-description">
+            <em>Les Naufragés</em> (très librement inspirée par l'œuvre de J.M Barrie), aborde la question du temps qui passe et d'une enfance qui se perd.
+          </p>
+          <a href="tragedie-enfants-perdus.html" class="creation-link">En savoir plus</a>
+        </div>
+      </div>
+
+      <!-- SILENCE IS DEATH -->
+      <div class="creation-item">
+        <div class="creation-image">
+          <img src="silence_is_death.jpg" alt="Silence is Death">
+        </div>
+        <div class="creation-info">
+          <h3>Silence is Death</h3>
+          <span class="creation-subtitle">D'après les œuvres de John Cassavetes</span>
+          <span class="creation-status">CRÉATION AUTOMNE 2025</span>
+          <div class="creation-credits">
+            <p><strong>Mis en scène par</strong> Ferdinand Mochot</p>
+            <p><strong>Avec</strong> Lior Aidan, Antoine Aubert, Athénaé Maso, Charles Montélimard, Laura Opsomer Mironov</p>
+          </div>
+          <p class="creation-description">
+            <em>Silence is Death</em> est une adaptation d'œuvres cinématographiques de John Cassavetes mêlée à de l'écriture personnelle. Cette pièce aborde de multiples questions comme la place de l'artiste, son influence et que reste-t-il lorsqu'il disparaît, pour ses collaborateurs et ses spectateurs ?
+          </p>
+          <a href="silence-is-death.html" class="creation-link">En savoir plus</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- BACK LINK -->
+  <div style="padding: 100px 50px;">
+    <a href="index.html" class="back-link">Retour à l'accueil</a>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+
+    // Fermer le menu quand on clique sur un lien
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        nav.classList.remove('active');
+      });
+    });
+
+    // Animations au scroll
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.creation-item').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
