@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L'Équipe — OFBPC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --noir: #0a0a0a;
+      --blanc: #fafafa;
+      --accent: #ff4444;
+      --gris: #888888;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Work Sans', sans-serif;
+      color: var(--noir);
+      background: var(--blanc);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAVIGATION */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 1px;
+      color: var(--noir);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .menu-toggle {
+      cursor: pointer;
+      width: 30px;
+      height: 20px;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--noir);
+      margin: 7px 0;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: var(--noir);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+      z-index: 999;
+    }
+
+    nav.active {
+      right: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      text-align: center;
+    }
+
+    nav ul li {
+      margin: 30px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+
+    nav.active ul li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    nav.active ul li:nth-child(1) { transition-delay: 0.1s; }
+    nav.active ul li:nth-child(2) { transition-delay: 0.15s; }
+    nav.active ul li:nth-child(3) { transition-delay: 0.2s; }
+    nav.active ul li:nth-child(4) { transition-delay: 0.25s; }
+    nav.active ul li:nth-child(5) { transition-delay: 0.3s; }
+    nav.active ul li:nth-child(6) { transition-delay: 0.35s; }
+    nav.active ul li:nth-child(7) { transition-delay: 0.4s; }
+
+    nav ul li a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 60px;
+      color: var(--blanc);
+      text-decoration: none;
+      letter-spacing: 2px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: var(--accent);
+    }
+
+    /* PAGE HERO */
+    .page-hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--noir);
+      color: var(--blanc);
+      text-align: center;
+      padding: 150px 50px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 68, 68, 0.1) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .page-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(60px, 10vw, 140px);
+      letter-spacing: 5px;
+      line-height: 1;
+      animation: fadeInUp 1s ease-out;
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* TEAM SECTION - STYLE MAGAZINE */
+    .team-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 100px 50px;
+    }
+
+    .team-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 120px;
+    }
+
+    /* TEAM MEMBER - LAYOUT ASYMÉTRIQUE */
+    .team-member {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+      position: relative;
+    }
+
+    .team-member.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Variation de positionnement */
+    .team-member:nth-child(odd) .team-photo {
+      margin-top: 60px;
+    }
+
+    .team-member:nth-child(even) {
+      grid-template-columns: 1.2fr 0.8fr;
+    }
+
+    .team-member:nth-child(even) .team-photo {
+      order: 2;
+      margin-top: -40px;
+    }
+
+    .team-member:nth-child(even) .team-info {
+      order: 1;
+      padding-right: 40px;
+    }
+
+    .team-member:nth-child(3n) .team-photo {
+      margin-top: -20px;
+    }
+
+    /* PHOTO */
+    .team-photo {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .team-photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: grayscale(10%);
+      transition: transform 0.6s ease, filter 0.6s ease;
+    }
+
+    .team-member:hover .team-photo img {
+      transform: scale(1.03);
+      filter: grayscale(0%);
+    }
+
+    /* INFO */
+    .team-info {
+      padding-top: 40px;
+    }
+
+    .team-info h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 5vw, 70px);
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      line-height: 1;
+      color: var(--noir);
+    }
+
+    .role {
+      font-size: 13px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+      font-weight: 600;
+      display: block;
+    }
+
+    .team-info p {
+      font-size: 15px;
+      line-height: 1.8;
+      font-weight: 300;
+      text-align: left;
+      color: #333;
+    }
+
+    /* SEPARATEUR */
+    .team-member::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    /* BACK LINK */
+    .back-link {
+      display: inline-block;
+      margin: 120px auto 0;
+      padding: 15px 40px;
+      background: var(--noir);
+      color: var(--blanc);
+      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      border: 2px solid var(--noir);
+      text-align: center;
+      display: block;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .back-link:hover {
+      background: transparent;
+      color: var(--noir);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .team-member,
+      .team-member:nth-child(even) {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+
+      .team-member:nth-child(odd) .team-photo {
+        margin-top: 30px;
+      }
+
+      .team-member:nth-child(even) .team-photo {
+        margin-top: -20px;
+      }
+
+      .team-info {
+        padding-top: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 20px 30px;
+      }
+
+      nav ul li a {
+        font-size: 40px;
+      }
+
+      .page-hero {
+        padding: 120px 30px 80px;
+        min-height: 50vh;
+      }
+
+      .team-section {
+        padding: 60px 30px;
+      }
+
+      .team-grid {
+        gap: 80px;
+      }
+
+      .team-member,
+      .team-member:nth-child(even) {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .team-member:nth-child(odd) .team-photo,
+      .team-member:nth-child(even) .team-photo,
+      .team-member:nth-child(3n) .team-photo {
+        margin-top: 0;
+        order: 1;
+      }
+
+      .team-member:nth-child(even) .team-info {
+        order: 2;
+        padding-right: 0;
+      }
+
+      .team-info {
+        padding-top: 0;
+      }
+
+      .team-member::after {
+        bottom: -40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">OFBPC</a>
+    <div class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="collectif.html">Le Collectif</a></li>
+      <li><a href="creations.html">Les Créations</a></li>
+      <li><a href="actualites.html">Actualités</a></li>
+      <li><a href="equipe.html">L'Équipe</a></li>
+      <li><a href="presse.html">Presse</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <h1>L'Équipe</h1>
+  </section>
+
+  <!-- TEAM SECTION -->
+  <section class="team-section">
+    <div class="team-grid">
+      
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="Lior_Aidan.jpg" alt="Lior Aidan">
+        </div>
+        <div class="team-info">
+          <h2>Lior Aidan</h2>
+          <span class="role">Actrice, Metteuse en scène</span>
+          <p>Lior Aïdan a commencé le théâtre au conservatoire régional de Marseille en 2011 dans les classes de Pilar Anthony et Jean Pierre Raffaelli. Elle a ensuite suivi une formation à Sciences Po Aix durant 5 ans où elle s'est spécialisée dans les métiers de la culture. C'est en 2020 qu'elle revient à ses premiers amours, en intégrant la classe de Éric Jakobiak puis de Agnès Adam au conservatoire du 8e à Paris. Elle commence le cinéma dans le même temps et enchaîne les courts métrages. Un marquant, Mazel Brouk, dont elle a le rôle principal est disponible sur Canal +. Entre 2022 et 2024 elle joue dans la pièce Revolt. She Said. Revolt Again. de Alice Birch au Train bleu à Avignon. Depuis 2022, elle co-crée le Collectif Inconstance dans laquelle elle met en scène la pièce Illusions de Ivan Viripaiev. Elle participera aux deux prochaines créations Silence is Death mis en scène par Ferdinand Mochot et la Tragédie des Enfants perdus de Maxime Allègre. En 2024, elle joue le rôle titre de la pièce FRIDA de Paola Duniaud à la Manufacture des Abbesses.</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="Ferdinand_Mochot.jpg" alt="Ferdinand Mochot">
+        </div>
+        <div class="team-info">
+          <h2>Ferdinand Mochot</h2>
+          <span class="role">Acteur, Metteur en scène</span>
+          <p>Ferdinand Mochot intèrgre le conservatoire du VIIIe arrondissement de Paris en septembre 2018. Il y travaille deux ans, emmené par Agnès Adam. Il participe également à des stages dirigés par Luca Giacomoni. Il part pendant l'été 2020 pour Berlin. Il sera membre pendant un an et demi de la FilmArche, école de cinéma auto-gérée berlinoise. Il y réalisera son premier court-métrage, "Die Strasse von Berlin". À son retour en France, il réintègre le conservatoire du VIIIe arrondissement de Paris en février 2022. À partir du départ du collectif Inconstance, il fait l'assistanat à la mise en scène sur "Illusions" à partir d'octobre 2022, il commence les premières recherches de "Silence is Death" au même moment. Il termine le conservatoire en juin 2023. Depuis, il a joué dans le film Matadors, d'Antoine Aubert ; il est pris en octobre 2024 pour jouer dans le projet "Tender Napalm" de Philip Ridley, mis en scène par Sophie Cachera. Il jouera dans "La Tragédie des Enfants Perdus" de Maxime Allègre.</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="Maxime_Allegre.jpg" alt="Maxime Allègre">
+        </div>
+        <div class="team-info">
+          <h2>Maxime Allègre</h2>
+          <span class="role">Acteur, Metteur en scène</span>
+          <p>Maxime Allègre démarre le théâtre à Troyes dans la compagnie de Christian Brendel et Maria Naudin puis dans la classe de Stéphanie Melet. En 2019, il participe au 22e Rencontres Internationales de L'Aria en Corse aux côtés notamment de Sandy Ouvrier qui le dirige dans "Notre Tartuffe". À Paris, il se forme au Conservatoire du 8e arrondissement dans la classe d'Agnès Adam puis intègre le CNSAD en 2023 et se forme aux côtés notamment d'Adama Diop, Mounir Margoum, Anne Monfort et Sharif Andoura. Il se forme également au chant avec Edwige Bourdy et Nikolas Takov, à la danse avec Juliette Roudet et Jean-Marc Hoolbecq ainsi qu'au clown avec Aurélien Ploquin. En parallèle, Il joue dans la pièce « Revolt. She said.Revolt again » d'Alice Birch, dans "Youpi" d'Eliott Margueron et est le narrateur du nouveau spectacle du groupe vocal "La Troupe ". Maxime participe à la première création du collectif : « Illusions » d'Ivan Viripaev mis en scène par Lior Aidan. Il mettra en scène La Tragédie des Enfants Perdus.</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="Laura_Opsomermironov.jpg" alt="Laura Opsomer Mironov">
+        </div>
+        <div class="team-info">
+          <h2>Laura Opsomer Mironov</h2>
+          <span class="role">Actrice, Directrice graphique et plastique</span>
+          <p>Laura Opsomer Mironov se forme d'abord à la Maîtrise des Hauts-de-Seine, elle chante et joue dans Der Mond de Carl Orff à l'Opéra Bastille sous la direction de Charlotte Nessi. De 2011 à 2014, elle entre en cycle théâtre au conservatoire de Clamart et suit en parralèle le cycle long des Atleliers du Carrousel au Musée des Arts Décoratifs. En 2015, elle entre à l'École Nationale Estienne et se forme à la création visuelle. Après l'obtention de son master, elle collabore avec les artistes Werker Collective, Sam de Groot, Joost Grootens, Charles Villa, Dinamo et Acédie58. En 2021, elle intègre le conservatoire du 8e arr. de Paris en cycle théâtre dirigé par Agnès Adam jusqu'en 2024 et suit les ateliers de Marc Ernotte au Théâtre 14. Entre 2022 et 2024, elle joue dans Revolt. She said. Revolt again. m.e.s par Sophie Cachera au Théâtre du Train Bleu à Avignon, Utopie m.e.s par Léo Monnin et tourne dans divers courts dont Pas perdus réalisé par Sarah Bordji sous le regard de F.J. Ossang à La Fémis. Elle co-crée le Collectif Inconstance et joue dans Illusions de Ivan Viripaev m.e.s par Lior Aidan au Lavoir Moderne et au Théâtre du Troisième Type.</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="Victor_Fisbach.jpg" alt="Victor Fisbach">
+        </div>
+        <div class="team-info">
+          <h2>Victor Fisbach</h2>
+          <span class="role">Acteur et réalisateur</span>
+          <p>Victor Fisbach est un jeune acteur et réalisateur. Il se forme dans les conservatoires Parisiens (Emilie Anna Maillet au 19e puis Agnès Adam au 8e). Il fait ses débuts avec de jeunes compagnies (Cassandre des Enfants Trouvé, Avignon 2023) et il apparait dans quelques courts métrages (C'est pas sorcière, Victor Letailleur ou Arrêt sur image de Melchior). En parallèle, il poursuit des études de cinéma à la Sorbonne qu'il conclut en réalisant pour Arte La veste Bleue, son premier court métrage. Il participe en tant que seconde caméra au documentaire sur l'adaptation théâtrale à Kigali de Petit pays de Gaël Faye, mis en scène par Frédéric Fisbach (Gahugu gato, Avignon In 2025) et réalisé par Élodie Fertil (sortie courant 2025). Il joue actuellement Voïnitsev dans Platonov mis en scène par Daria Maltseva (Avignon 2025). Il assiste en ce moment Maxime Allegre à la mise en scène de la Tragédie des enfants perdus, un spectacle librement inspiré de l'œuvre de J.M. Barrie.</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="Charles_Montelimard.jpg" alt="Charles Montélimard">
+        </div>
+        <div class="team-info">
+          <h2>Charles Montélimard</h2>
+          <span class="role">Acteur et réalisateur</span>
+          <p>Charles Montélimard commence par l'improvisation avant d'intégrer le cours Florent pour un an. Il profite de cette année pour écrire des courts-métrages qu'il réalisera par la suite. Après des apparitions au cinéma dans Boîte noire de Yann Gozlan et Cigare au miel de Kamir Aïnouz, il rejoint la classe d'Agnès Adam au conservatoire du 8ème, dans laquelle il apprend la méthode de Stanislavski et continue ses projets de cinéma en parallèle. Il commence alors au théâtre en 2021 dans Revolt. She said. Revolt. Again. d'Alice Birch au Grand Point-Virgule. Il intègre ensuite le Collectif Inconstance en 2022, et joue dans Illusions de Ivan Viripaev, mis en scène par Lior Aidan. Durant cette période il se précise à l'écriture et à la réalisation avec des adaptations de pièces Tchekhoviennes pour le cinéma : Ivanov, Sacha et les autres en 2021 et Avant la fin, adaptation libre de Sur la Grand'Route en 2024. Prochainement, il jouera dans la Tragédie des enfants perdus, mise en scène par Maxime Allègre et dans Silence is Death mis en scène par Ferdinand Mochot.</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="Athenae_Maso.jpg" alt="Athénaé Maso y Guell Rivet">
+        </div>
+        <div class="team-info">
+          <h2>Athénaé Maso y Guell Rivet</h2>
+          <span class="role">Actrice</span>
+          <p>Athénaé Maso Y Guell Rivet pratique le théâtre depuis l'âge de 8 ans. Après le lycée, elle suit des études de lettres et obtient une licence de philosophie à la Sorbonne. Elle intègre le conservatoire du 8e arrondissement en septembre 2021 où elle se forme, avec la pédaguogie d'Agnès Adam, à la méthode de l'Analyse-Action, d'après les recherches de Maria Knebel. Début 2023, elle rejoint l'équipe du spectacle Pénélope, par la compagnie des enfants trouvés. Elle fait également partie de leur deuxième spectacle, Cassandre, qui a tourné au festival d'Avignon 2023. Elle touche aussi au cinéma dans des projets bénévoles, entant que comédienne, notamment dans "Arrêt sur image" de Melchior Delpech et "Matadors", réalisé par Antoine Aubert. En 2023, elle rejoint le Collectif Inconstance en participant à la création de "Silence is Death", mis en scène par Ferdinand Mochot. Elle jouera prochainement dans "La Tragédie des enfants perdus", mis en scène par Maxime Allègre assisté de Victor Fisbach.</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="Camille_Doucet.jpg" alt="Camille Doucet">
+        </div>
+        <div class="team-info">
+          <h2>Camille Doucet</h2>
+          <span class="role">Dramaturge et chargée de diffusion</span>
+          <p>Camille Doucet commence le théâtre très jeune puis mène des études plus théoriques en entrant en prépa Khâgne théâtre au lycée Claude Monet avec des professeurs tels que Edgar Petitier en analyse dramaturgique, Céline Schaeffer (assistante à la mise en scène de Novarina) en mise en scène et direction d'acteur, mais aussi Emmanuel Clolus (scénographe de Wajdi Mouawad) en création de maquette. En 2019, en parallèle de sa licence elle intègre le conservatoire du 16e arrondissement, où elle collabore avec Lior Aidan dans le jeu et la mise en scène. Elle obtient ensuite son Master de Lettres et Arts à Paris Diderot, avec un mémoire sur la notion de théâtralité dans les Arts visuels, puis obtient un poste en tant qu'attachée de production dans la Cie Jeune Public Minute Papillon. Elle intègre le projet de Lior Aidan en tant que dramaturge, épanouissant aussi bien son amour de la scène que sa passion pour la littérature et l'analyse.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <a href="index.html" class="back-link">Retour à l'accueil</a>
+  </section>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+
+    // Fermer le menu quand on clique sur un lien
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        nav.classList.remove('active');
+      });
+    });
+
+    // Animations au scroll pour les membres de l'équipe
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.team-member').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
