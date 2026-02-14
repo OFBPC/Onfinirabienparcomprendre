@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galerie — OFBPC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --noir: #0a0a0a;
+      --blanc: #fafafa;
+      --accent: #ff4444;
+      --gris: #888888;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Work Sans', sans-serif;
+      color: var(--noir);
+      background: var(--noir);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAVIGATION */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 1px;
+      color: var(--blanc);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .menu-toggle {
+      cursor: pointer;
+      width: 30px;
+      height: 20px;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--blanc);
+      margin: 7px 0;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: var(--noir);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+      z-index: 999;
+    }
+
+    nav.active {
+      right: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      text-align: center;
+    }
+
+    nav ul li {
+      margin: 30px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+
+    nav.active ul li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    nav.active ul li:nth-child(1) { transition-delay: 0.1s; }
+    nav.active ul li:nth-child(2) { transition-delay: 0.15s; }
+    nav.active ul li:nth-child(3) { transition-delay: 0.2s; }
+    nav.active ul li:nth-child(4) { transition-delay: 0.25s; }
+    nav.active ul li:nth-child(5) { transition-delay: 0.3s; }
+    nav.active ul li:nth-child(6) { transition-delay: 0.35s; }
+    nav.active ul li:nth-child(7) { transition-delay: 0.4s; }
+
+    nav ul li a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 60px;
+      color: var(--blanc);
+      text-decoration: none;
+      letter-spacing: 2px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: var(--accent);
+    }
+
+    /* PAGE TITLE */
+    .page-title {
+      padding: 120px 50px 60px;
+      text-align: center;
+    }
+
+    .page-title h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(50px, 8vw, 100px);
+      letter-spacing: 5px;
+      color: var(--blanc);
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .page-title .subtitle {
+      font-size: clamp(14px, 2vw, 18px);
+      color: #999;
+      margin-top: 10px;
+      letter-spacing: 2px;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* CAROUSEL */
+    .carousel-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 50px 60px;
+    }
+
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 0;
+      background: #000;
+    }
+
+    .carousel-slide {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 80vh;
+      object-fit: contain;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    /* NAVIGATION ARROWS */
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--blanc);
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 24px;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .carousel-nav:hover {
+      background: rgba(255, 68, 68, 0.9);
+      border-color: var(--accent);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .prev { left: 20px; }
+    .next { right: 20px; }
+
+    /* COUNTER */
+    .carousel-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      color: var(--blanc);
+      padding: 10px 25px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      z-index: 10;
+    }
+
+    .carousel-counter .current {
+      color: var(--accent);
+    }
+
+    /* THUMBNAILS */
+    .thumbnail-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 50px 80px;
+    }
+
+    .thumbnail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .thumbnail {
+      aspect-ratio: 3/2;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(30%) brightness(0.7);
+      transition: all 0.4s ease;
+    }
+
+    .thumbnail:hover img {
+      filter: grayscale(0%) brightness(1);
+      transform: scale(1.1);
+    }
+
+    .thumbnail.active {
+      border-color: var(--accent);
+    }
+
+    .thumbnail.active img {
+      filter: grayscale(0%) brightness(1);
+    }
+
+    /* BACK LINK */
+    .back-section {
+      padding: 40px 50px 80px;
+      text-align: center;
+    }
+
+    .back-link {
+      display: inline-block;
+      padding: 15px 40px;
+      background: transparent;
+      color: var(--blanc);
+      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      border: 2px solid var(--blanc);
+    }
+
+    .back-link:hover {
+      background: var(--blanc);
+      color: var(--noir);
+      transform: translateY(-3px);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header {
+        padding: 20px 30px;
+      }
+
+      nav ul li a {
+        font-size: 40px;
+      }
+
+      .page-title {
+        padding: 100px 30px 40px;
+      }
+
+      .carousel-section {
+        padding: 20px 0 40px;
+      }
+
+      .carousel-slide img {
+        height: 60vh;
+      }
+
+      .carousel-nav {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+
+      .prev { left: 10px; }
+      .next { right: 10px; }
+
+      .thumbnail-section {
+        padding: 30px 20px 60px;
+      }
+
+      .thumbnail-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+      }
+
+      .back-section {
+        padding: 30px 20px 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">OFBPC</a>
+    <div class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="collectif.html">Le Collectif</a></li>
+      <li><a href="creations.html">Les Créations</a></li>
+      <li><a href="actualites.html">Actualités</a></li>
+      <li><a href="equipe.html">L'Équipe</a></li>
+      <li><a href="presse.html">Presse</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE TITLE -->
+  <div class="page-title">
+    <h1>Galerie</h1>
+    <p class="subtitle">Illusions — Ivan Viripaev</p>
+  </div>
+
+  <!-- CAROUSEL -->
+  <section class="carousel-section">
+    <div class="carousel-container">
+      <button class="carousel-nav prev" onclick="moveSlide(-1)">‹</button>
+      <div class="carousel-slide">
+        <img src="18-%20Illusions.jpg" alt="Illusions">
+        <img src="01-%20Illusions.jpg" alt="Illusions">
+        <img src="09-%20Illusions.jpg" alt="Illusions">
+        <img src="11-%20Illusions.jpg" alt="Illusions">
+        <img src="13-%20Illusions.jpg" alt="Illusions">
+        <img src="16-%20Illusions.jpg" alt="Illusions">
+        <img src="29-%20Illusions.jpg" alt="Illusions">
+        <img src="34-%20Illusions.jpg" alt="Illusions">
+        <img src="37-%20Illusions.jpg" alt="Illusions">
+      </div>
+      <button class="carousel-nav next" onclick="moveSlide(1)">›</button>
+      <div class="carousel-counter">
+        <span class="current">1</span> / <span class="total">9</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- THUMBNAILS -->
+  <section class="thumbnail-section">
+    <div class="thumbnail-grid">
+      <div class="thumbnail active" onclick="setSlide(0)">
+        <img src="18-%20Illusions.jpg" alt="Illusions">
+      </div>
+      <div class="thumbnail" onclick="setSlide(1)">
+        <img src="01-%20Illusions.jpg" alt="Illusions">
+      </div>
+      <div class="thumbnail" onclick="setSlide(2)">
+        <img src="09-%20Illusions.jpg" alt="Illusions">
+      </div>
+      <div class="thumbnail" onclick="setSlide(3)">
+        <img src="11-%20Illusions.jpg" alt="Illusions">
+      </div>
+      <div class="thumbnail" onclick="setSlide(4)">
+        <img src="13-%20Illusions.jpg" alt="Illusions">
+      </div>
+      <div class="thumbnail" onclick="setSlide(5)">
+        <img src="16-%20Illusions.jpg" alt="Illusions">
+      </div>
+      <div class="thumbnail" onclick="setSlide(6)">
+        <img src="29-%20Illusions.jpg" alt="Illusions">
+      </div>
+      <div class="thumbnail" onclick="setSlide(7)">
+        <img src="34-%20Illusions.jpg" alt="Illusions">
+      </div>
+      <div class="thumbnail" onclick="setSlide(8)">
+        <img src="37-%20Illusions.jpg" alt="Illusions">
+      </div>
+    </div>
+  </section>
+
+  <!-- BACK LINK -->
+  <section class="back-section">
+    <a href="illusions.html" class="back-link">← Retour à Illusions</a>
+  </section>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+
+    // Fermer le menu quand on clique sur un lien
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        nav.classList.remove('active');
+      });
+    });
+
+    // Carousel
+    let slideIndex = 0;
+    const slides = document.querySelector('.carousel-slide');
+    const images = document.querySelectorAll('.carousel-slide img');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    const currentCounter = document.querySelector('.carousel-counter .current');
+    const totalCounter = document.querySelector('.carousel-counter .total');
+    const totalSlides = images.length;
+
+    totalCounter.textContent = totalSlides;
+
+    function moveSlide(n) {
+      slideIndex = (slideIndex + n + totalSlides) % totalSlides;
+      updateSlide();
+    }
+
+    function setSlide(n) {
+      slideIndex = n;
+      updateSlide();
+    }
+
+    function updateSlide() {
+      const offset = -slideIndex * 100;
+      slides.style.transform = `translateX(${offset}%)`;
+      currentCounter.textContent = slideIndex + 1;
+      
+      // Update active thumbnail
+      thumbnails.forEach((thumb, index) => {
+        if (index === slideIndex) {
+          thumb.classList.add('active');
+        } else {
+          thumb.classList.remove('active');
+        }
+      });
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') moveSlide(-1);
+      if (e.key === 'ArrowRight') moveSlide(1);
+    });
+
+    // Initialize
+    updateSlide();
+  </script>
+</body>
+</html>
