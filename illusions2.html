@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Illusions — OFBPC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --noir: #0a0a0a;
+      --blanc: #fafafa;
+      --accent: #ff4444;
+      --gris: #888888;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Work Sans', sans-serif;
+      color: var(--noir);
+      background: var(--blanc);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAVIGATION */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 1px;
+      color: var(--noir);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .menu-toggle {
+      cursor: pointer;
+      width: 30px;
+      height: 20px;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--noir);
+      margin: 7px 0;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: var(--noir);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+      z-index: 999;
+    }
+
+    nav.active {
+      right: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      text-align: center;
+    }
+
+    nav ul li {
+      margin: 30px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+
+    nav.active ul li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    nav.active ul li:nth-child(1) { transition-delay: 0.1s; }
+    nav.active ul li:nth-child(2) { transition-delay: 0.15s; }
+    nav.active ul li:nth-child(3) { transition-delay: 0.2s; }
+    nav.active ul li:nth-child(4) { transition-delay: 0.25s; }
+    nav.active ul li:nth-child(5) { transition-delay: 0.3s; }
+    nav.active ul li:nth-child(6) { transition-delay: 0.35s; }
+    nav.active ul li:nth-child(7) { transition-delay: 0.4s; }
+
+    nav ul li a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 60px;
+      color: var(--blanc);
+      text-decoration: none;
+      letter-spacing: 2px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: var(--accent);
+    }
+
+    /* HERO IMAGE */
+    .hero {
+      position: relative;
+      height: 85vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--noir);
+    }
+
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('18-%20Illusions.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.5;
+      animation: slowZoom 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes slowZoom {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--blanc);
+    }
+
+    .hero-content h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(70px, 12vw, 160px);
+      letter-spacing: 8px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-content .subtitle {
+      font-size: clamp(18px, 2.5vw, 24px);
+      margin-top: 20px;
+      font-weight: 300;
+      letter-spacing: 3px;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.3s forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* CONTENT SECTION */
+    .content-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 50px;
+    }
+
+    .content-block {
+      margin-bottom: 80px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .content-block:nth-child(1) { animation-delay: 0.1s; }
+    .content-block:nth-child(2) { animation-delay: 0.2s; }
+    .content-block:nth-child(3) { animation-delay: 0.3s; }
+    .content-block:nth-child(4) { animation-delay: 0.4s; }
+
+    .content-block h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 60px);
+      letter-spacing: 3px;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .content-block h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    .content-block p {
+      font-size: clamp(16px, 2vw, 18px);
+      line-height: 1.9;
+      margin-bottom: 20px;
+      font-weight: 300;
+      color: #333;
+    }
+
+    .content-block em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    /* TEAM GRID */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .team-item {
+      background: #f5f5f5;
+      padding: 25px;
+      border-left: 3px solid var(--accent);
+      transition: all 0.3s ease;
+    }
+
+    .team-item:hover {
+      transform: translateX(5px);
+      background: #fff;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-item strong {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 8px;
+      color: var(--noir);
+    }
+
+    .team-item p {
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+      color: #555;
+    }
+
+    /* DATES SECTION */
+    .dates-section {
+      background: var(--noir);
+      color: var(--blanc);
+      padding: 80px 50px;
+    }
+
+    .dates-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .dates-content h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 60px);
+      letter-spacing: 3px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .dates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .date-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-left: 4px solid var(--accent);
+      transition: all 0.3s ease;
+    }
+
+    .date-card:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .date-card .date {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .date-card .venue {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .date-card .location {
+      font-size: 15px;
+      color: #bbb;
+    }
+
+    .dates-history {
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dates-history h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #bbb;
+    }
+
+    .history-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .history-item {
+      font-size: 14px;
+      color: #999;
+      padding: 8px 15px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 20px;
+    }
+
+    /* BUTTONS */
+    .btn-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 35px;
+      background: var(--noir);
+      color: var(--blanc);
+      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      border: 2px solid var(--noir);
+    }
+
+    .btn:hover {
+      background: transparent;
+      color: var(--noir);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--noir);
+      border: 2px solid var(--noir);
+    }
+
+    .btn-outline:hover {
+      background: var(--noir);
+      color: var(--blanc);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header {
+        padding: 20px 30px;
+      }
+
+      nav ul li a {
+        font-size: 40px;
+      }
+
+      .hero {
+        height: 70vh;
+      }
+
+      .content-section {
+        padding: 60px 30px;
+      }
+
+      .dates-section {
+        padding: 60px 30px;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dates-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">OFBPC</a>
+    <div class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="collectif.html">Le Collectif</a></li>
+      <li><a href="creations.html">Les Créations</a></li>
+      <li><a href="actualites.html">Actualités</a></li>
+      <li><a href="equipe.html">L'Équipe</a></li>
+      <li><a href="presse.html">Presse</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-image"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Illusions</h1>
+      <p class="subtitle">D'Ivan Viripaev</p>
+    </div>
+  </section>
+
+  <!-- DATES À VENIR -->
+  <section class="dates-section">
+    <div class="dates-content">
+      <h2>Prochaines dates</h2>
+      <div class="dates-grid">
+        <div class="date-card">
+          <div class="date">8 Mai 2026</div>
+          <div class="venue">Festival Coye la Forêt</div>
+          <div class="location">Coye-la-Forêt</div>
+        </div>
+        <div class="date-card">
+          <div class="date">Novembre 2026</div>
+          <div class="venue">Piano'cktail</div>
+          <div class="location">Théâtre de la Ville de Bouguenais</div>
+        </div>
+      </div>
+
+      <div class="dates-history">
+        <h3>Dates passées</h3>
+        <div class="history-list">
+          <span class="history-item">Novembre 2023 — Théâtre le Quai, Troyes</span>
+          <span class="history-item">Mai 2024 — Lavoir Moderne Parisien</span>
+          <span class="history-item">Novembre 2024 — Théâtre du Troisième Type</span>
+          <span class="history-item">Juillet 2025 — Festival d'Avignon OFF, Théâtre du Train Bleu</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="content-section">
+    
+    <div class="content-block">
+      <h2>Présentation du spectacle</h2>
+      <p>
+        <em>Illusions</em> d'Ivan Viripaev est la première création du Collectif. À travers un texte qui questionne l'existence, les trajectoires de vie, la vérité, l'amour et la vocation, ce sont cinq artistes qui se sont retrouvés et ont eu l'envie de porter ces sujets au plateau.
+      </p>
+      <p>
+        Et si notre vie n'était qu'une illusion ? Et l'amour alors ? Après nous, que restera-t-il de nos vérités et de nos mensonges ? Ce sont ces questions qui animent les quatre narrateurs venus nous raconter l'histoire de Dennis, Sandra, Albert et Margaret, deux couples mariés à l'orée de leur mort. Le public est au plus proche des épisodes de vie et d'amour de ces couples, entre errances et épiphanies, animés par une quête de réponses et de vérité.
+      </p>
+      <p>
+        Le parti pris de mise en scène n'a pas été de représenter les personnes âgées dont l'histoire est question mais plutôt de mettre l'accent sur les jeunes qui la raconte. Le rapport des jeunes entre eux, leurs interactions, leur langage corporel raconte aussi une histoire. Une autre ? Peut être.
+      </p>
+      <p>
+        Tout notre travail a été de construire l'intériorité et les relations entre ces personnages jeunes, et leur lien avec l'histoire qu'ils racontent de manière ludique. Jouer avec la vérité des histoires racontées, s'amuser à les transformer, jouer à jouer avec les autres et avec les spectateurs. La notion de vérité est centrale, les personnages, les narrateurs, les acteurs et les spectateurs cherchent la vérité dans cette histoire. Mais celle-ci ne se retrouve que dans la réalité de la représentation.
+      </p>
+      <p>
+        La création a duré cinq semaines, dont trois au Théâtre le Quai à Troyes. Nous y avons joué les premières dates en Novembre 2023, puis en mai 2024 au Lavoir Moderne Parisien, en novembre 2024 au Théâtre du Troisième Type (Rémi Prin), et au Festival d'Avignon OFF au Théâtre du Train Bleu en juillet 2025. Une tournée est envisagée pour les saisons prochaines.
+      </p>
+    </div>
+
+    <div class="content-block">
+      <h2>Équipe artistique</h2>
+      <div class="team-grid">
+        <div class="team-item">
+          <strong>Traduction</strong>
+          <p>Tania Mogouilevskaia et Gilles Morel</p>
+        </div>
+        <div class="team-item">
+          <strong>Mise en scène</strong>
+          <p>Lior Aidan</p>
+        </div>
+        <div class="team-item">
+          <strong>Assistant mise en scène</strong>
+          <p>Ferdinand Mochot</p>
+        </div>
+        <div class="team-item">
+          <strong>Création lumière</strong>
+          <p>Titouan Laporte</p>
+        </div>
+        <div class="team-item">
+          <strong>Aide costumes et scénographie</strong>
+          <p>Laura Opsomer</p>
+        </div>
+        <div class="team-item">
+          <strong>Production</strong>
+          <p>Collectif On finira bien par comprendre / Eclosion 13</p>
+        </div>
+        <div class="team-item">
+          <strong>Avec</strong>
+          <p>Lior Aidan, Maxime Allègre, Charles Montélimard, Laura Opsomer Mironov</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <a href="gallery.html" class="btn">Voir la galerie</a>
+      <a href="creations.html" class="btn-outline">Retour aux créations</a>
+      <a href="index.html" class="btn-outline">Retour à l'accueil</a>
+    </div>
+
+  </section>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+
+    // Fermer le menu quand on clique sur un lien
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        nav.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
