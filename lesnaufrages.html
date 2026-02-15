@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les Naufragés — OFBPC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --noir: #0a0a0a;
+      --blanc: #fafafa;
+      --accent: #ff4444;
+      --gris: #888888;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Work Sans', sans-serif;
+      color: var(--noir);
+      background: var(--blanc);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAVIGATION */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 1px;
+      color: var(--noir);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .menu-toggle {
+      cursor: pointer;
+      width: 30px;
+      height: 20px;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--noir);
+      margin: 7px 0;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: var(--noir);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+      z-index: 999;
+    }
+
+    nav.active {
+      right: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      text-align: center;
+    }
+
+    nav ul li {
+      margin: 30px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+
+    nav.active ul li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    nav.active ul li:nth-child(1) { transition-delay: 0.1s; }
+    nav.active ul li:nth-child(2) { transition-delay: 0.15s; }
+    nav.active ul li:nth-child(3) { transition-delay: 0.2s; }
+    nav.active ul li:nth-child(4) { transition-delay: 0.25s; }
+    nav.active ul li:nth-child(5) { transition-delay: 0.3s; }
+    nav.active ul li:nth-child(6) { transition-delay: 0.35s; }
+    nav.active ul li:nth-child(7) { transition-delay: 0.4s; }
+
+    nav ul li a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 60px;
+      color: var(--blanc);
+      text-decoration: none;
+      letter-spacing: 2px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: var(--accent);
+    }
+
+    /* HERO IMAGE */
+    .hero {
+      position: relative;
+      height: 85vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--noir);
+    }
+
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('naufrages.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.4;
+      animation: slowZoom 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes slowZoom {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--blanc);
+    }
+
+    .hero-content h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(70px, 12vw, 160px);
+      letter-spacing: 8px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-content .subtitle {
+      font-size: clamp(18px, 2.5vw, 24px);
+      margin-top: 20px;
+      font-weight: 300;
+      letter-spacing: 3px;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.3s forwards;
+    }
+
+    .hero-content .status-badge {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 30px;
+      background: var(--accent);
+      color: var(--blanc);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: 2px;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.5s forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* INTRO QUOTE */
+    .intro-quote {
+      background: var(--noir);
+      color: var(--blanc);
+      padding: 80px 50px;
+      text-align: center;
+    }
+
+    .intro-quote blockquote {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 300;
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    /* CONTENT SECTION */
+    .content-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 50px;
+    }
+
+    .content-block {
+      margin-bottom: 80px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .content-block:nth-child(1) { animation-delay: 0.1s; }
+    .content-block:nth-child(2) { animation-delay: 0.2s; }
+    .content-block:nth-child(3) { animation-delay: 0.3s; }
+    .content-block:nth-child(4) { animation-delay: 0.4s; }
+
+    .content-block h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 60px);
+      letter-spacing: 3px;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .content-block h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    .content-block p {
+      font-size: clamp(16px, 2vw, 18px);
+      line-height: 1.9;
+      margin-bottom: 20px;
+      font-weight: 300;
+      color: #333;
+    }
+
+    .content-block em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    /* INFO BOXES */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 40px 0;
+    }
+
+    .info-box {
+      background: #f5f5f5;
+      padding: 20px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .info-box strong {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 8px;
+      color: var(--noir);
+    }
+
+    .info-box p {
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+      color: #555;
+    }
+
+    /* TEAM GRID */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .team-item {
+      background: #f5f5f5;
+      padding: 25px;
+      border-left: 3px solid var(--accent);
+      transition: all 0.3s ease;
+    }
+
+    .team-item:hover {
+      transform: translateX(5px);
+      background: #fff;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-item strong {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 8px;
+      color: var(--noir);
+    }
+
+    .team-item p {
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+      color: #555;
+    }
+
+    /* TIMELINE */
+    .timeline-section {
+      background: var(--noir);
+      color: var(--blanc);
+      padding: 100px 50px;
+    }
+
+    .timeline-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .timeline-content h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 60px);
+      letter-spacing: 3px;
+      margin-bottom: 60px;
+      text-align: center;
+    }
+
+    .timeline-item {
+      margin-bottom: 50px;
+      padding-left: 40px;
+      border-left: 2px solid var(--accent);
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 5px;
+      width: 14px;
+      height: 14px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .timeline-year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .timeline-item h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .timeline-item p {
+      font-size: 15px;
+      color: #bbb;
+      margin-bottom: 5px;
+    }
+
+    /* BUTTONS */
+    .btn-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 60px;
+      justify-content: center;
+      padding: 60px 50px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 35px;
+      background: var(--noir);
+      color: var(--blanc);
+      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      border: 2px solid var(--noir);
+    }
+
+    .btn:hover {
+      background: transparent;
+      color: var(--noir);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--noir);
+      border: 2px solid var(--noir);
+    }
+
+    .btn-outline:hover {
+      background: var(--noir);
+      color: var(--blanc);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header {
+        padding: 20px 30px;
+      }
+
+      nav ul li a {
+        font-size: 40px;
+      }
+
+      .hero {
+        height: 70vh;
+      }
+
+      .intro-quote {
+        padding: 60px 30px;
+      }
+
+      .content-section {
+        padding: 60px 30px;
+      }
+
+      .timeline-section {
+        padding: 60px 30px;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-container {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 40px 30px;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">OFBPC</a>
+    <div class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="collectif.html">Le Collectif</a></li>
+      <li><a href="creations.html">Les Créations</a></li>
+      <li><a href="actualites.html">Actualités</a></li>
+      <li><a href="equipe.html">L'Équipe</a></li>
+      <li><a href="presse.html">Presse</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-image"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Les Naufragés</h1>
+      <p class="subtitle">Très librement inspiré de l'œuvre de J.M. Barrie</p>
+      <span class="status-badge">Création 2026/2027</span>
+    </div>
+  </section>
+
+  <!-- INTRO QUOTE -->
+  <section class="intro-quote">
+    <blockquote>
+      « Et vous, ce soir, à quoi êtes-vous prêts à croire ? »
+    </blockquote>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="content-section">
+    
+    <div class="content-block">
+      <h2>Le projet</h2>
+      <p>
+        Avec <em>Les Naufragés</em>, nous souhaitons interroger notre capacité à rêver, à croire et à préserver l'enfance en nous, dans un monde qui tend à réduire l'expérience humaine à la rationalité et à la rentabilité. Le projet naît d'un besoin urgent : maintenir vivante cette part de nous qui invente, s'émerveille et crée, non par naïveté, mais comme une condition de survie face au réel.
+      </p>
+      <p>
+        Ce spectacle s'inscrit au cœur de notre démarche artistique, où le corps devient un espace de fiction, de mémoire et de résistance. Nous envisageons le théâtre comme un lieu fragile mais essentiel, un espace où la croyance et l'imaginaire sont des actes conscients, capables de produire du sens et du lien.
+      </p>
+    </div>
+
+    <div class="content-block">
+      <h2>La fable</h2>
+      <p>
+        La fable met en scène cinq interprètes, des naufragés, réunis sur l'Île du Nulle Part, un territoire primitif, rappelant le Jardin d'Arcadie. Sur cette île au soleil éternel, la lune finit par revenir. Avec elle surgit la marque du temps, rappelant que rien n'est éternel — ni l'enfance, ni le rêve, ni même le théâtre.
+      </p>
+      <p>
+        Les naufragés luttent alors contre la fin annoncée : la fin du spectacle, le retour du réel, la perte de l'enfance, la disparition du jeu. Comme dans toute tragédie, l'issue est connue dès le début. C'est précisément dans cette conscience de la fin que se situe notre enjeu : <strong>choisir de croire malgré tout</strong>.
+      </p>
+    </div>
+
+    <div class="content-block">
+      <h2>L'écriture scénique</h2>
+      <p>
+        Au plateau, les interprètes incarnent des « créatures de l'enfance ». Êtres marginaux, ils dépassent le burlesque pour atteindre une croyance poétique. Comme les personnages de Shakespeare, ils sont prêts à se dissiper dans l'air au moindre souffle, nous rappelant que « nous sommes de l'étoffe dont les rêves sont faits, et [que] notre petite vie est entourée par un sommeil » (<em>La Tempête</em>).
+      </p>
+      <p>
+        Le spectacle se construit d'abord par le corps, la danse, la voix et le souffle. Une partie du récit se déploie dans un langage primitif, inventé, qui précède le sens et sollicite une écoute sensible et intuitive. Le travail avec l'argile, matière vivante, façonne les corps et transforme l'espace scénique en un lieu multiple : cabane, navire, paysage, tombeau ou refuge.
+      </p>
+    </div>
+
+    <div class="content-block">
+      <h2>Informations pratiques</h2>
+      <div class="info-grid">
+        <div class="info-box">
+          <strong>Durée</strong>
+          <p>2h (tout public)<br>1h (jeune public)</p>
+        </div>
+        <div class="info-box">
+          <strong>Public</strong>
+          <p>À partir de 14 ans<br>(jeune public : dès 8 ans)</p>
+        </div>
+        <div class="info-box">
+          <strong>Jauge</strong>
+          <p>Sans jauge spécifique</p>
+        </div>
+        <div class="info-box">
+          <strong>Création</strong>
+          <p>2026 / 2027</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h2>Équipe artistique</h2>
+      <div class="team-grid">
+        <div class="team-item">
+          <strong>Mise en scène & écriture</strong>
+          <p>Maxime Allègre</p>
+        </div>
+        <div class="team-item">
+          <strong>Assistanat</strong>
+          <p>Victor Fisbach</p>
+        </div>
+        <div class="team-item">
+          <strong>Collaboration artistique</strong>
+          <p>Philippe Bertrand</p>
+        </div>
+        <div class="team-item">
+          <strong>Conception graphique</strong>
+          <p>Laura Opsomer Mironov</p>
+        </div>
+        <div class="team-item">
+          <strong>Administration & diffusion</strong>
+          <p>Lior Aidan, Camille Doucet</p>
+        </div>
+        <div class="team-item">
+          <strong>Production</strong>
+          <p>Collectif OFBPC</p>
+        </div>
+        <div class="team-item">
+          <strong>Avec</strong>
+          <p>Lior Aidan, Athénaé Maso, Ferdinand Mochot, Charles Montélimard, Laura Opsomer Mironov</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h2>Soutiens & partenaires</h2>
+      <p>
+        Conservatoire National Supérieur d'Art Dramatique (CNSAD), Mairie d'Amfreville, Théâtre Le Palace, Compagnie La Transversale - Evreux Portes de Normandie, Simon Falguières et la Compagnie le K
+      </p>
+    </div>
+
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline-section">
+    <div class="timeline-content">
+      <h2>Calendrier de création</h2>
+      
+      <div class="timeline-item">
+        <div class="timeline-year">2024</div>
+        <h4>Explorations</h4>
+        <p>Répétitions et explorations au plateau</p>
+        <p>CNSAD, Théâtre le Palace, Paris</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2025</div>
+        <h4>Janvier à Juillet — Dramaturgie et recherche</h4>
+        <p>&nbsp;</p>
+        <h4>Août — Résidence d'écriture</h4>
+        <p>Écriture au plateau du 07/08 au 18/08 (10 jours)</p>
+        <p>Sortie de résidence en public</p>
+        <p>Amfreville, Normandie</p>
+        <p>&nbsp;</p>
+        <h4>Août à Septembre 2026 — Finalisation</h4>
+        <p>Finalisation de l'écriture et dramaturgie</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2026</div>
+        <h4>Septembre/Octobre — Résidence 1</h4>
+        <p>Création (1 à 2 semaines)</p>
+        <p>&nbsp;</p>
+        <h4>Novembre — Résidence 2</h4>
+        <p>Création (1 à 2 semaines)</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2027</div>
+        <h4>Janvier — Résidence 3</h4>
+        <p>Création (4 semaines)</p>
+        <p>Sortie de résidence en public</p>
+        <p>Communication (photos, captation)</p>
+        <p>Début de diffusion et ateliers d'actions culturelles</p>
+        <p>&nbsp;</p>
+        <h4>Mars — Premières représentations</h4>
+        <p>Diffusion du spectacle</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <div class="btn-container">
+    <a href="creations.html" class="btn-outline">Retour aux créations</a>
+    <a href="index.html" class="btn-outline">Retour à l'accueil</a>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+
+    // Fermer le menu quand on clique sur un lien
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        nav.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
