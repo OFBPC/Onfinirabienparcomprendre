@@ -3,24 +3,777 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Silence is Death - OFBPC</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <title>Silence is Death — OFBPC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Montserrat', sans-serif; color: #000; background: #FAF0E6; text-align: center; padding: 50px; }
-    h1 { font-size: 2.5rem; }
-    p { font-size: 1.2rem; text-align: justify; max-width: 800px; margin: auto; }
-    img { width: 100%; max-width: 800px; margin-top: 20px; }
-    a { color: #FFD700; text-decoration: none; font-weight: bold; display: block; margin-top: 20px; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --noir: #0a0a0a;
+      --blanc: #fafafa;
+      --accent: #ff4444;
+      --gris: #888888;
+      --grunge: #2a2a2a;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Work Sans', sans-serif;
+      color: var(--blanc);
+      background: var(--noir);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAVIGATION */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 1px;
+      color: var(--blanc);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .menu-toggle {
+      cursor: pointer;
+      width: 30px;
+      height: 20px;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--blanc);
+      margin: 7px 0;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: var(--noir);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+      z-index: 999;
+    }
+
+    nav.active {
+      right: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      text-align: center;
+    }
+
+    nav ul li {
+      margin: 30px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+
+    nav.active ul li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    nav.active ul li:nth-child(1) { transition-delay: 0.1s; }
+    nav.active ul li:nth-child(2) { transition-delay: 0.15s; }
+    nav.active ul li:nth-child(3) { transition-delay: 0.2s; }
+    nav.active ul li:nth-child(4) { transition-delay: 0.25s; }
+    nav.active ul li:nth-child(5) { transition-delay: 0.3s; }
+    nav.active ul li:nth-child(6) { transition-delay: 0.35s; }
+    nav.active ul li:nth-child(7) { transition-delay: 0.4s; }
+
+    nav ul li a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 60px;
+      color: var(--blanc);
+      text-decoration: none;
+      letter-spacing: 2px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: var(--accent);
+    }
+
+    /* HERO CINEMATIC */
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--noir);
+    }
+
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('sid.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.3;
+      filter: grayscale(70%) contrast(120%);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        repeating-linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.15),
+          rgba(0, 0, 0, 0.15) 2px,
+          transparent 2px,
+          transparent 4px
+        ),
+        linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.9));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--blanc);
+      max-width: 900px;
+      padding: 0 30px;
+    }
+
+    .hero-content h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(60px, 10vw, 140px);
+      letter-spacing: 12px;
+      animation: fadeInUp 1s ease-out;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-content .subtitle {
+      font-size: clamp(16px, 2.5vw, 22px);
+      margin-top: 20px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.3s forwards;
+      font-style: italic;
+      color: #ccc;
+    }
+
+    .hero-content .attribution {
+      margin-top: 30px;
+      font-size: clamp(14px, 2vw, 18px);
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.5s forwards;
+      color: #999;
+    }
+
+    .status-badge {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 12px 30px;
+      background: rgba(255, 68, 68, 0.2);
+      border: 2px solid var(--accent);
+      color: var(--blanc);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.7s forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* CONTENT SECTION */
+    .content-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 50px;
+      background: var(--noir);
+    }
+
+    .content-block {
+      margin-bottom: 80px;
+    }
+
+    .content-block h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 60px);
+      letter-spacing: 3px;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+      color: var(--blanc);
+    }
+
+    .content-block h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    .content-block p {
+      font-size: clamp(16px, 2vw, 18px);
+      line-height: 1.9;
+      margin-bottom: 20px;
+      font-weight: 300;
+      color: #ccc;
+    }
+
+    .content-block em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .content-block strong {
+      color: var(--blanc);
+    }
+
+    /* SPLIT IMAGE SECTION */
+    .split-image-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin: 80px 0;
+    }
+
+    .split-image {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+    }
+
+    .split-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(60%) contrast(110%);
+      transition: all 0.6s ease;
+    }
+
+    .split-image:hover img {
+      filter: grayscale(30%) contrast(120%);
+      transform: scale(1.05);
+    }
+
+    /* INFO BOXES GRUNGE */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 40px 0;
+    }
+
+    .info-box {
+      background: var(--grunge);
+      padding: 25px;
+      border-left: 3px solid var(--accent);
+      position: relative;
+    }
+
+    .info-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.02) 2px,
+        rgba(255, 255, 255, 0.02) 4px
+      );
+      pointer-events: none;
+    }
+
+    .info-box strong {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 10px;
+      color: var(--blanc);
+    }
+
+    .info-box p {
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+      color: #aaa;
+    }
+
+    /* TEAM GRID */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .team-item {
+      background: var(--grunge);
+      padding: 25px;
+      border-left: 3px solid var(--accent);
+      transition: all 0.3s ease;
+    }
+
+    .team-item:hover {
+      transform: translateX(5px);
+      background: #333;
+    }
+
+    .team-item strong {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 8px;
+      color: var(--blanc);
+    }
+
+    .team-item p {
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+      color: #aaa;
+    }
+
+    /* TIMELINE GRUNGE */
+    .timeline-section {
+      background: var(--grunge);
+      padding: 100px 50px;
+      position: relative;
+    }
+
+    .timeline-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 2px,
+          rgba(255, 255, 255, 0.02) 2px,
+          rgba(255, 255, 255, 0.02) 4px
+        );
+      pointer-events: none;
+    }
+
+    .timeline-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-content h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 60px);
+      letter-spacing: 3px;
+      margin-bottom: 60px;
+      text-align: center;
+      color: var(--blanc);
+    }
+
+    .timeline-item {
+      margin-bottom: 50px;
+      padding-left: 40px;
+      border-left: 2px solid var(--accent);
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 5px;
+      width: 14px;
+      height: 14px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .timeline-year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .timeline-item h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      color: var(--blanc);
+    }
+
+    .timeline-item p {
+      font-size: 15px;
+      color: #aaa;
+      margin-bottom: 5px;
+    }
+
+    .timeline-item .film-title {
+      font-style: italic;
+      color: #888;
+      font-size: 14px;
+    }
+
+    /* BUTTONS */
+    .btn-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 60px;
+      justify-content: center;
+      padding: 60px 50px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 35px;
+      background: transparent;
+      color: var(--blanc);
+      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      border: 2px solid var(--blanc);
+    }
+
+    .btn:hover {
+      background: var(--blanc);
+      color: var(--noir);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .split-image-section {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 20px 30px;
+      }
+
+      nav ul li a {
+        font-size: 40px;
+      }
+
+      .hero {
+        height: 80vh;
+      }
+
+      .content-section {
+        padding: 60px 30px;
+      }
+
+      .timeline-section {
+        padding: 60px 30px;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-container {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 40px 30px;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
+  
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">OFBPC</a>
+    <div class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
 
-  <h1>Silence is Death</h1>
-  <img src="silence_is_death.jpg" alt="Affiche de Silence is Death">
-  <p>Silence is Death explore la mémoire artistique et l’influence des créateurs à travers l'œuvre de John Cassavetes...</p>
+  <!-- NAVIGATION -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="collectif.html">Le Collectif</a></li>
+      <li><a href="creations.html">Les Créations</a></li>
+      <li><a href="actualites.html">Actualités</a></li>
+      <li><a href="equipe.html">L'Équipe</a></li>
+      <li><a href="presse.html">Presse</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
 
-  <a href="spectacles-creation.html">Retour aux spectacles en création</a>
-  <a href="index.html">Retour à l'accueil</a>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-image"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Silence is Death</h1>
+      <p class="subtitle">Histoires emmêlées de vie et de passion</p>
+      <p class="attribution">D'après les œuvres de John Cassavetes</p>
+      <span class="status-badge">En écriture — Création Automne 2027 / Hiver 2028</span>
+    </div>
+  </section>
 
+  <!-- CONTENT -->
+  <section class="content-section">
+    
+    <div class="content-block">
+      <h2>Le projet</h2>
+      <p>
+        <em>Silence is Death</em> est une adaptation d'œuvres cinématographiques de John Cassavetes mêlée à de l'écriture personnelle. Cette pièce aborde de multiples questions comme la place de l'artiste, son influence et que reste-t-il lorsqu'il disparaît, pour ses collaborateurs et ses spectateurs ? Quel langage pouvons-nous trouver si nous ne nous comprenons pas ? Lorsque l'incompréhension règne, à quel moment la violence apparaît ?
+      </p>
+      <p>
+        Le spectacle sera une traversée de ces questionnements, des grands thèmes comme <strong>l'amour, la création, l'amitié et le deuil</strong>.
+      </p>
+    </div>
+
+    <div class="content-block">
+      <h2>La fable</h2>
+      <p>
+        SID commence sur les funérailles d'un artiste. Cinq personnes y assistent, ses anciens collaborateurs. Commence ainsi la question du deuil qui vont les amener à se replonger dans leurs anciens projets artistiques avec ce mort ; comme une manière de célébrer cette personne, cet artiste et surtout de faire vivre et résonner l'œuvre après la mort même de l'inventeur.
+      </p>
+      <p>
+        Traverser les questionnements et les œuvres de la troupe de John Cassavetes apparaît comme un miroir de la vie de notre jeune collectif. <strong>Quel est l'écho aujourd'hui de ce qui résonnait si fort hier et comment le renouveler et le transformer.</strong>
+      </p>
+    </div>
+
+    <!-- SPLIT IMAGES -->
+    <div class="split-image-section">
+      <div class="split-image">
+        <img src="sid.jpg" alt="Silence is Death">
+      </div>
+      <div class="split-image">
+        <img src="sid2.jpg" alt="Silence is Death">
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h2>Mise en scène</h2>
+      <p>
+        En terme de mise en scène, le désir est de créer une grande proximité entre le public et les acteurs au plateau. Le public sera invité à s'installer dans un décor en bord de scène. L'éclairage sera le plus artisanal possible, fait de lampes au plateau, manipulées par les comédiens. La musique sera aussi contrôlée au plateau par une platine vinyle.
+      </p>
+      <p>
+        Nous avons déjà réalisé trois semaines de travail et de recherche au plateau en résidence pour nourrir l'écriture dont une partie s'est déroulée à la Maison Jacques Copeau en 2024. <em>Silence is Death</em> est maintenant en écriture avec une création prévue pour automne 2027 / hiver 2028.
+      </p>
+    </div>
+
+    <div class="content-block">
+      <h2>Formes du spectacle</h2>
+      <div class="info-grid">
+        <div class="info-box">
+          <strong>Forme en salle</strong>
+          <p>2h — Trois narrations différentes possibles</p>
+        </div>
+        <div class="info-box">
+          <strong>Forme itinérante</strong>
+          <p>Intérieure et extérieure en dialogue avec le paysage naturel, graphique et historique</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h2>Équipe artistique</h2>
+      <div class="team-grid">
+        <div class="team-item">
+          <strong>Mise en scène</strong>
+          <p>Ferdinand Mochot</p>
+        </div>
+        <div class="team-item">
+          <strong>Avec</strong>
+          <p>Lior Aidan, Antoine Aubert, Athénaé Maso, Charles Montélimard, Laura Opsomer Mironov</p>
+        </div>
+        <div class="team-item">
+          <strong>Production</strong>
+          <p>Collectif OFBPC</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h2>Soutiens & partenaires</h2>
+      <p>
+        Mairie de Bretagnolles, Maison Jacques Copeau, Ville de Paris
+      </p>
+    </div>
+
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline-section">
+    <div class="timeline-content">
+      <h2>Parcours de création</h2>
+      
+      <div class="timeline-item">
+        <div class="timeline-year">2022</div>
+        <h4>Résidence 1 — Décembre</h4>
+        <p class="film-title">Minnie and Moskowitz, Une femme sous influence</p>
+        <p>Bretagnolles, Normandie</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2023</div>
+        <h4>Résidence 2 — Février</h4>
+        <p class="film-title">Meurtre d'un Bookmaker Chinois, Husbands</p>
+        <p>Bretagnolles, Normandie</p>
+        <p>&nbsp;</p>
+        <h4>Résidence 3 — Mai</h4>
+        <p class="film-title">Opening Night, Love Streams</p>
+        <p>Bretagnolles, Normandie</p>
+        <p>&nbsp;</p>
+        <h4>Représentation en itinérance — 3 août</h4>
+        <p>Domaine de la Tour du Bon, Var</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2024</div>
+        <h4>Résidence 4 — Janvier</h4>
+        <p>Lecture et essais autour d'une 1ère version de texte</p>
+        <p>Bretagnolles, Normandie</p>
+        <p>&nbsp;</p>
+        <h4>Résidence 5 — Mars</h4>
+        <p>Maison Jacques Copeau, Bourgogne</p>
+        <p>&nbsp;</p>
+        <h4>Représentation — 8 mars</h4>
+        <p>Plateau et itinérance pour les habitants de Pernand-Vergelesses</p>
+        <p>Maison Jacques Copeau</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2025 — 2026</div>
+        <h4>Écriture</h4>
+        <p>Finalisation du texte et de la dramaturgie</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2027 — 2028</div>
+        <h4>Création</h4>
+        <p>Automne 2027 / Hiver 2028</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <div class="btn-container">
+    <a href="creations.html" class="btn">Retour aux créations</a>
+    <a href="index.html" class="btn">Retour à l'accueil</a>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+
+    // Fermer le menu quand on clique sur un lien
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        nav.classList.remove('active');
+      });
+    });
+  </script>
 </body>
 </html>
