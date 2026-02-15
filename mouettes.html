@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouettes — OFBPC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --noir: #0a0a0a;
+      --blanc: #fafafa;
+      --accent: #ff4444;
+      --gris: #888888;
+      --grunge: #1a1a1a;
+      --concrete: #2d2d2d;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Work Sans', sans-serif;
+      color: var(--blanc);
+      background: var(--noir);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAVIGATION */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 10, 10, 0.98);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 1px;
+      color: var(--blanc);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .menu-toggle {
+      cursor: pointer;
+      width: 30px;
+      height: 20px;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--blanc);
+      margin: 7px 0;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: var(--noir);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+      z-index: 999;
+    }
+
+    nav.active {
+      right: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      text-align: center;
+    }
+
+    nav ul li {
+      margin: 30px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+
+    nav.active ul li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    nav.active ul li:nth-child(1) { transition-delay: 0.1s; }
+    nav.active ul li:nth-child(2) { transition-delay: 0.15s; }
+    nav.active ul li:nth-child(3) { transition-delay: 0.2s; }
+    nav.active ul li:nth-child(4) { transition-delay: 0.25s; }
+    nav.active ul li:nth-child(5) { transition-delay: 0.3s; }
+    nav.active ul li:nth-child(6) { transition-delay: 0.35s; }
+    nav.active ul li:nth-child(7) { transition-delay: 0.4s; }
+
+    nav ul li a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 60px;
+      color: var(--blanc);
+      text-decoration: none;
+      letter-spacing: 2px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: var(--accent);
+    }
+
+    /* HERO TUNNEL */
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: 
+        radial-gradient(ellipse at center, transparent 0%, var(--noir) 100%),
+        var(--grunge);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 3px,
+          rgba(255, 255, 255, 0.01) 3px,
+          rgba(255, 255, 255, 0.01) 6px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 3px,
+          rgba(255, 255, 255, 0.01) 3px,
+          rgba(255, 255, 255, 0.01) 6px
+        );
+      opacity: 0.3;
+    }
+
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('mouettes.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15;
+      filter: grayscale(100%) contrast(150%);
+      mix-blend-mode: overlay;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.8) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--blanc);
+      max-width: 900px;
+      padding: 0 30px;
+    }
+
+    .hero-content h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(80px, 12vw, 180px);
+      letter-spacing: 20px;
+      animation: glitchIn 1.5s ease-out;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      text-shadow: 
+        0 0 20px rgba(255, 68, 68, 0.5),
+        0 0 40px rgba(255, 68, 68, 0.3);
+    }
+
+    @keyframes glitchIn {
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+        text-shadow: 
+          -5px 0 rgba(255, 0, 0, 0.8),
+          5px 0 rgba(0, 255, 255, 0.8);
+      }
+      50% {
+        text-shadow: 
+          -2px 0 rgba(255, 0, 0, 0.4),
+          2px 0 rgba(0, 255, 255, 0.4);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+        text-shadow: 
+          0 0 20px rgba(255, 68, 68, 0.5),
+          0 0 40px rgba(255, 68, 68, 0.3);
+      }
+    }
+
+    .hero-content .subtitle {
+      font-size: clamp(14px, 2vw, 18px);
+      margin-top: 20px;
+      font-weight: 300;
+      letter-spacing: 3px;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.5s forwards;
+      text-transform: uppercase;
+      color: #999;
+    }
+
+    .status-badge {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 12px 30px;
+      background: rgba(255, 68, 68, 0.1);
+      border: 2px solid var(--accent);
+      color: var(--blanc);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.8s forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* QUOTE SECTION */
+    .quote-section {
+      background: var(--concrete);
+      padding: 100px 50px;
+      position: relative;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .quote-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 10px,
+          rgba(255, 255, 255, 0.01) 10px,
+          rgba(255, 255, 255, 0.01) 20px
+        );
+    }
+
+    .quote-section blockquote {
+      max-width: 1000px;
+      margin: 0 auto;
+      font-size: clamp(20px, 3vw, 32px);
+      font-weight: 300;
+      line-height: 1.6;
+      font-style: italic;
+      position: relative;
+      z-index: 1;
+      color: #ccc;
+      text-align: center;
+    }
+
+    .quote-section blockquote::before {
+      content: '«';
+      font-size: 80px;
+      color: var(--accent);
+      position: absolute;
+      left: -40px;
+      top: -20px;
+      opacity: 0.3;
+    }
+
+    /* CONTENT SECTION */
+    .content-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 50px;
+      background: var(--noir);
+    }
+
+    .content-block {
+      margin-bottom: 80px;
+    }
+
+    .content-block h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 60px);
+      letter-spacing: 3px;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+      color: var(--blanc);
+      text-transform: uppercase;
+    }
+
+    .content-block h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .content-block p {
+      font-size: clamp(16px, 2vw, 18px);
+      line-height: 1.9;
+      margin-bottom: 20px;
+      font-weight: 300;
+      color: #bbb;
+    }
+
+    .content-block em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .content-block strong {
+      color: var(--blanc);
+      font-weight: 600;
+    }
+
+    /* INFO BOXES */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 40px 0;
+    }
+
+    .info-box {
+      background: var(--grunge);
+      padding: 25px;
+      border-left: 3px solid var(--accent);
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .info-box strong {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 10px;
+      color: var(--blanc);
+      text-transform: uppercase;
+    }
+
+    .info-box p {
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+      color: #999;
+    }
+
+    /* TEAM GRID */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .team-item {
+      background: var(--grunge);
+      padding: 25px;
+      border-left: 3px solid var(--accent);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .team-item:hover {
+      transform: translateX(5px);
+      background: var(--concrete);
+      border-left-color: var(--blanc);
+    }
+
+    .team-item strong {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 8px;
+      color: var(--blanc);
+      text-transform: uppercase;
+    }
+
+    .team-item p {
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+      color: #999;
+    }
+
+    /* TIMELINE */
+    .timeline-section {
+      background: var(--concrete);
+      padding: 100px 50px;
+      position: relative;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .timeline-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-content h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 60px);
+      letter-spacing: 3px;
+      margin-bottom: 60px;
+      text-align: center;
+      color: var(--blanc);
+      text-transform: uppercase;
+    }
+
+    .timeline-item {
+      margin-bottom: 50px;
+      padding-left: 40px;
+      border-left: 2px solid var(--accent);
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 5px;
+      width: 14px;
+      height: 14px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    .timeline-year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .timeline-item h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      color: var(--blanc);
+    }
+
+    .timeline-item p {
+      font-size: 15px;
+      color: #999;
+      margin-bottom: 5px;
+    }
+
+    /* BUTTONS */
+    .btn-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 60px;
+      justify-content: center;
+      padding: 60px 50px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 35px;
+      background: transparent;
+      color: var(--blanc);
+      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      border: 2px solid var(--blanc);
+      text-transform: uppercase;
+    }
+
+    .btn:hover {
+      background: var(--blanc);
+      color: var(--noir);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header {
+        padding: 20px 30px;
+      }
+
+      nav ul li a {
+        font-size: 40px;
+      }
+
+      .hero {
+        height: 80vh;
+      }
+
+      .quote-section {
+        padding: 60px 30px;
+      }
+
+      .quote-section blockquote::before {
+        left: -20px;
+        font-size: 60px;
+      }
+
+      .content-section {
+        padding: 60px 30px;
+      }
+
+      .timeline-section {
+        padding: 60px 30px;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-container {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 40px 30px;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">OFBPC</a>
+    <div class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="collectif.html">Le Collectif</a></li>
+      <li><a href="creations.html">Les Créations</a></li>
+      <li><a href="actualites.html">Actualités</a></li>
+      <li><a href="equipe.html">L'Équipe</a></li>
+      <li><a href="presse.html">Presse</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-image"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Mouettes</h1>
+      <p class="subtitle">Inspiré de l'œuvre d'Anton Tchekhov</p>
+      <span class="status-badge">En développement</span>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote-section">
+    <blockquote>
+      Nous prônons un théâtre de forces brutes, sacrées. Un théâtre qui ne se réfléchit pas mais qui se sent, les personnages sont tous saillants, comme des tessons de bouteille. De leurs bouches sortent des flammes ou des fleurs ou du sang.
+    </blockquote>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="content-section">
+    
+    <div class="content-block">
+      <h2>La fable</h2>
+      <p>
+        Comme décor, un lac. Une jeune fille vit aux abords de ce lac. Elle rêve de devenir actrice. Un jeune homme en tombe amoureux. Ensemble, ils montent un spectacle. Lui écrit, elle joue. Elle rêve de s'envoler, lui, son théâtre, c'est elle. La mère du jeune homme, une grande actrice, moque le spectacle, violemment arrêté par l'auteur. De cet arrêt, les trajectoires des deux jeunes amants s'éloignent de plus en plus. Sujet pour un petit récit…
+      </p>
+      <p>
+        Reprenons… Une arène. Le combat universel : <strong>les Nouveaux contre les Anciens</strong>. Les Nouveaux qui veulent une place, les Anciens qui veulent garder la leur. Le lac ensorceleur, source de la force de la jeunesse. Alors les Anciens jouent, dansent, rient, de plus en plus fort pour essayer de ne pas entendre l'orage qui gronde au loin. Le lac s'agite, la vague risquerait de les ensevelir.
+      </p>
+    </div>
+
+    <div class="content-block">
+      <h2>Le désir comme arme</h2>
+      <p>
+        <em>La Mouette</em> est le berceau de beaucoup d'imagination, pièce fondamentale pour les jeunes créateurs. Parce qu'elle parle du désir. Le désir comme élan et le désir comme danger aussi. Le désir de la nouvelle génération comme danger pour l'ancienne. Le désir comme arme immense.
+      </p>
+      <p>
+        <strong>Comment créer du nouveau dans un cadre qui appartient à une ancienne génération qui nous étouffe ?</strong> Chez nous, Tréplev n'échoue pas. Sa proposition éclate dans le reste de la pièce. Comme une force latente pour ou contre laquelle tout le monde se bat.
+      </p>
+    </div>
+
+    <div class="content-block">
+      <h2>Une comédie décadente</h2>
+      <p>
+        Ils sont décadents, lubriques, choquants, hilarants, ridicules, dérangeants, comme ce moment d'entre-deux, entre l'avant et l'après. Cette pièce est une comédie. Parce que même les démons du monde souterrain deviendront un jour peut-être les oligarques du monde de l'art et alors ils se feront détrôner par la prochaine nouvelle vague.
+      </p>
+    </div>
+
+    <div class="content-block">
+      <h2>Formes du spectacle</h2>
+      <div class="info-grid">
+        <div class="info-box">
+          <strong>Forme en salle</strong>
+          <p>2h</p>
+        </div>
+        <div class="info-box">
+          <strong>Forme hors les murs</strong>
+          <p>2h — Tunnels, espaces souterrains, lieux non-conventionnels</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h2>Équipe artistique</h2>
+      <div class="team-grid">
+        <div class="team-item">
+          <strong>Mise en scène</strong>
+          <p>Athénaé Maso Y Guell Rivet</p>
+        </div>
+        <div class="team-item">
+          <strong>Assistanat</strong>
+          <p>Camille Doucet</p>
+        </div>
+        <div class="team-item">
+          <strong>Avec</strong>
+          <p>Lior Aidan, Aurèle Parisis, Ferdinand Mochot, Charles Montélimard, Laura Opsomer Mironov, Victor Fisbach, Antoine Aubert, Lou Lampros</p>
+        </div>
+        <div class="team-item">
+          <strong>Production</strong>
+          <p>Collectif OFBPC</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h2>Soutiens & partenaires</h2>
+      <p>
+        Conservatoire Camille Saint-Saëns, Théâtre Le Palace
+      </p>
+    </div>
+
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline-section">
+    <div class="timeline-content">
+      <h2>Parcours de création</h2>
+      
+      <div class="timeline-item">
+        <div class="timeline-year">2025</div>
+        <h4>Résidence 1 — Mars</h4>
+        <p>Domaine de la Boderie, Normandie</p>
+        <p>&nbsp;</p>
+        <h4>Résidence 2 — Avril</h4>
+        <p>La Guimonière, Pays de la Loire</p>
+        <p>&nbsp;</p>
+        <h4>Répétitions — Mai, Juin</h4>
+        <p>Théâtre du Palace, Paris</p>
+        <p>&nbsp;</p>
+        <h4>Ouverture du travail — 23 Juin</h4>
+        <p>Présentation publique</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">À venir</div>
+        <h4>Reprise du projet</h4>
+        <p>Création prévue dans 1 à 2 ans</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <div class="btn-container">
+    <a href="creations.html" class="btn">Retour aux créations</a>
+    <a href="index.html" class="btn">Retour à l'accueil</a>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+
+    // Fermer le menu quand on clique sur un lien
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        nav.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
