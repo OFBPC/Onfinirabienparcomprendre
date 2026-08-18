@@ -239,6 +239,85 @@
       }
     }
 
+    /* BADGE ACTUALITÉS SUR LE HERO */
+    .news-badge {
+      position: absolute;
+      top: 110px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 15;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 26px;
+      background: rgba(10, 10, 10, 0.55);
+      border: 1px solid rgba(250, 250, 250, 0.4);
+      border-radius: 50px;
+      backdrop-filter: blur(6px);
+      text-decoration: none;
+      color: var(--blanc);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 0.6s forwards;
+      transition: all 0.3s ease;
+    }
+
+    .news-badge:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateX(-50%) translateY(-3px);
+      box-shadow: 0 10px 25px rgba(255, 68, 68, 0.35);
+    }
+
+    .news-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .news-badge .dot::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 1.8s ease-out infinite;
+    }
+
+    .news-badge:hover .dot,
+    .news-badge:hover .dot::after {
+      background: var(--blanc);
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(3);
+        opacity: 0;
+      }
+    }
+
+    .news-badge .arrow {
+      font-size: 14px;
+      transition: transform 0.3s ease;
+    }
+
+    .news-badge:hover .arrow {
+      transform: translateX(4px);
+    }
+
     .scroll-indicator {
       position: absolute;
       bottom: 50px;
@@ -474,6 +553,12 @@
         grid-template-columns: 1fr;
         gap: 40px;
       }
+
+      .news-badge {
+        top: 90px;
+        font-size: 13px;
+        padding: 10px 18px;
+      }
     }
 
     /* ANIMATIONS AU SCROLL */
@@ -524,6 +609,13 @@
       <div class="slide" style="background-image: url('33-%20Illusions.jpg');"></div>
       <div class="slide" style="background-image: url('35-%20Illusions.jpg');"></div>
     </div>
+
+    <a href="actualites2.html" class="news-badge">
+      <span class="dot"></span>
+      Actualités
+      <span class="arrow">→</span>
+    </a>
+
     <div class="hero-content">
       <h1> On Finira Bien Par Comprendre</h1>
       <p class="subtitle">             Collectif d'artistes</p>
@@ -570,14 +662,15 @@
 
         <div class="creation-item">
           <h3>Spectacles en Création</h3>
+           <h4>Les Naufragés</h4>
+          <p>Une exploration du passage de l'enfance à l'âge adulte et la disparition progressive du jeu et de l'imaginaire.</p>
+        </div>
+
+        <div class="creation-item">
           <h4>Silence is Death</h4>
           <p>Une réflexion sur la mémoire artistique et l'influence des créateurs, inspirée des œuvres de John Cassavetes.</p>
         </div>
 
-        <div class="creation-item">
-          <h4>Les Naufragés</h4>
-          <p>Une exploration du passage de l'enfance à l'âge adulte et la disparition progressive du jeu et de l'imaginaire.</p>
-        </div>
       </div>
 
       <a href="creations2.html" class="btn btn-outline">Découvrir nos créations</a>
@@ -684,4 +777,3 @@
   </script>
 </body>
 </html>
-
