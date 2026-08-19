@@ -204,7 +204,46 @@
       gap: 120px;
     }
 
-    /* TEAM MEMBER - LAYOUT ASYMÉTRIQUE */
+    /* TITRE DE SOUS-SECTION "ILS TRAVAILLENT AVEC NOUS" */
+    .collab-heading {
+      max-width: 1400px;
+      margin: 160px 0 0;
+      padding-top: 60px;
+      border-top: 2px solid var(--noir);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .collab-heading h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 80px);
+      letter-spacing: 3px;
+      line-height: 1;
+      position: relative;
+      display: inline-block;
+    }
+
+    .collab-heading h2::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--accent);
+    }
+
+    /* Marge de la grille de collaborateurs, réutilise .team-grid mais placée après le titre */
+    .collab-heading + .team-grid {
+      margin-top: 80px;
+    }
+
+    /* Variation de positionnement */
+    .team-member:nth-child(odd) .team-photo {
+      margin-top: 60px;
+    }
+
     .team-member {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -219,11 +258,6 @@
     .team-member.visible {
       opacity: 1;
       transform: translateY(0);
-    }
-
-    /* Variation de positionnement */
-    .team-member:nth-child(odd) .team-photo {
-      margin-top: 60px;
     }
 
     .team-member:nth-child(even) {
@@ -293,6 +327,11 @@
       font-weight: 300;
       text-align: left;
       color: #333;
+    }
+
+    .team-info p em {
+      color: var(--accent);
+      font-style: italic;
     }
 
     /* SEPARATEUR */
@@ -401,6 +440,11 @@
       .team-member::after {
         bottom: -40px;
       }
+
+      .collab-heading {
+        margin-top: 100px;
+        padding-top: 40px;
+      }
     }
   </style>
 </head>
@@ -445,7 +489,7 @@
         <div class="team-info">
           <h2>Lior Aidan</h2>
           <span class="role">Actrice, Metteuse en scène</span>
-          <p>Lior Aidan est metteuse en scène et comédienne. Formée au CNR de Marseille par Pilar Anthony et Jean-Pierre Raffaelli, au Conservatoire du VIIIe auprès d’Agnès Adam, et au TNS lors de stages, elle co-fonde en 2023 le Collectif OFBPC. Elle met en scène sa première pièce, Illusions de Viripaev, créée et jouée au Théâtre le Quai, au LMP, au Théâtre les 3T en 2024 puis au Théâtre du Train bleu dans le cadre du Festival d'Avignon en 2025. Entre 2022 et 2026, elle joue sous la direction de metteur-es en scène comme Sophie Cachera, Paola Duniaud,Ferdinand Mochot, Ines Pigoullié et Aurélia Puchault.</p>
+          <p>Lior Aidan est metteuse en scène et comédienne. Formée au CNR de Marseille par Pilar Anthony et Jean-Pierre Raffaelli, au Conservatoire du VIIIe auprès d'Agnès Adam, et au TNS lors de stages, elle co-fonde en 2023 le Collectif OFBPC. Elle met en scène sa première pièce, Illusions de Viripaev, créée et jouée au Théâtre le Quai, au LMP, au Théâtre les 3T en 2024 puis au Théâtre du Train bleu dans le cadre du Festival d'Avignon en 2025. Entre 2022 et 2026, elle joue sous la direction de metteur-es en scène comme Sophie Cachera, Paola Duniaud,Ferdinand Mochot, Ines Pigoullié et Aurélia Puchault.</p>
         </div>
       </div>
 
@@ -456,7 +500,7 @@
         <div class="team-info">
           <h2>Maxime Allègre</h2>
           <span class="role">Acteur, Metteur en scène</span>
-          <p> Maxime démarre le théâtre à Troyes avec Christian Brendel et Maria Naudin puis avec Stéphanie Melet. En 2019, il participe aux Rencontres Internationales de L'Aria aux côtés notamment de Sandy Ouvrier. À Paris, il se forme au Conservatoire du VIlle arrondissement dans la classe d'Agnès Adam puis intègre le CNSAD en 2023 et se forme aux côtés notamment d’Adama Diop, Mounir Margoum, Anne Monfort, Sharif Andoura. Il se forme également au chant avec Edwige Bourdy et Nikolas Takov, à la danse avec Juliette Roudet et Jean-Marc Hoolbecq ainsi qu’au clown avec Aurélien Ploquin.Il joue sous la direction de Sylvain Creuzevault, Elsa Granat, Anne Monfort et participe aux masterclass de Rebecca Chaillon, Céline Champinot et Penda Diouf. En parallèle, Maxime co-fonde le collectif OFBPC en 2023 et participe à la première création : Illusions d’Ivan Viripaev  Depuis, il est membre du collectif en tant que comédien et metteur en scène.</p>
+          <p> Maxime démarre le théâtre à Troyes avec Christian Brendel et Maria Naudin puis avec Stéphanie Melet. En 2019, il participe aux Rencontres Internationales de L'Aria aux côtés notamment de Sandy Ouvrier. À Paris, il se forme au Conservatoire du VIlle arrondissement dans la classe d'Agnès Adam puis intègre le CNSAD en 2023 et se forme aux côtés notamment d'Adama Diop, Mounir Margoum, Anne Monfort, Sharif Andoura. Il se forme également au chant avec Edwige Bourdy et Nikolas Takov, à la danse avec Juliette Roudet et Jean-Marc Hoolbecq ainsi qu'au clown avec Aurélien Ploquin.Il joue sous la direction de Sylvain Creuzevault, Elsa Granat, Anne Monfort et participe aux masterclass de Rebecca Chaillon, Céline Champinot et Penda Diouf. En parallèle, Maxime co-fonde le collectif OFBPC en 2023 et participe à la première création : Illusions d'Ivan Viripaev  Depuis, il est membre du collectif en tant que comédien et metteur en scène.</p>
         </div>
       </div>
       
@@ -467,7 +511,7 @@
         <div class="team-info">
           <h2>Ferdinand Mochot</h2>
           <span class="role">Acteur, Metteur en scène</span>
-          <p>Ferdinand Mochot est formé au Conservatoire du VIIIe auprès d’Agnès Adam en 2018 et en 2022. Entre les deux, il étudie à Berlin à l’école de cinéma la FilmArche, il réalise son premier court-métrage, “Die Strasse von Berlin”. En 2023, il co-fonde le collectif OFBPC. Assistant à la mise en scène sur Illusions à partir d’octobre 2022, il commence les premières recherches de Silence is Death au même moment. Il joue en 2024 dans le film Matadors, d’Antoine Aubert ; dans Tendre Napalm de Philip Ridley, mis en scène par Sophie Cachera et dans Les Naufragés de Maxime Allègre. </p>
+          <p>Ferdinand Mochot est formé au Conservatoire du VIIIe auprès d'Agnès Adam en 2018 et en 2022. Entre les deux, il étudie à Berlin à l'école de cinéma la FilmArche, il réalise son premier court-métrage, "Die Strasse von Berlin". En 2023, il co-fonde le collectif OFBPC. Assistant à la mise en scène sur Illusions à partir d'octobre 2022, il commence les premières recherches de Silence is Death au même moment. Il joue en 2024 dans le film Matadors, d'Antoine Aubert ; dans Tendre Napalm de Philip Ridley, mis en scène par Sophie Cachera et dans Les Naufragés de Maxime Allègre. </p>
         </div>
       </div>
 
@@ -478,7 +522,7 @@
         <div class="team-info">
           <h2>Laura Opsomer Mironov</h2>
           <span class="role">Actrice, Directrice graphique et plastique</span>
-          <p>Laura Opsomer Mironov se forme à la Maîtrise des Hauts-de-Seine, au conservatoire Henri Dutilleux, au conservatoire du VIIIe avec Agnès Adam, au Théâtre 14 avec Marc Ernotte. Elle étudie la création plastique et visuelle aux Arts Décoratifs et à l’école Estienne, obtient son master et collabore avec Sam De Groot, Acédie58, Dinamo. Elle tourne à la Fémis, la Cinéfabrique, joue dans Revolt. She said. Revolt again. de Sophie Cachera, Utopie de Léo Monnin, co-fonde le Collectif On finira bien par comprendre et joue dans Illusions de Ivan Viripaev m.e.s par Lior Aidan au Théâtre du Train Bleu à Avignon et en tournée.</p>
+          <p>Laura Opsomer Mironov se forme à la Maîtrise des Hauts-de-Seine, au conservatoire Henri Dutilleux, au conservatoire du VIIIe avec Agnès Adam, au Théâtre 14 avec Marc Ernotte. Elle étudie la création plastique et visuelle aux Arts Décoratifs et à l'école Estienne, obtient son master et collabore avec Sam De Groot, Acédie58, Dinamo. Elle tourne à la Fémis, la Cinéfabrique, joue dans Revolt. She said. Revolt again. de Sophie Cachera, Utopie de Léo Monnin, co-fonde le Collectif On finira bien par comprendre et joue dans Illusions de Ivan Viripaev m.e.s par Lior Aidan au Théâtre du Train Bleu à Avignon et en tournée.</p>
         </div>
       </div>
 
@@ -489,7 +533,7 @@
         <div class="team-info">
           <h2>Victor Fisbach</h2>
           <span class="role">Acteur et réalisateur</span>
-          <p>Victor Fisbach est un jeune acteur parisien. Après un an de classe préparatoire littéraire, il intègre le conservatoire du XIXème puis du VIIIème arrondissement pendant 2 puis 3 ans. Il y travaille avec Emilie Anna Maillet et Agnès Adam. En parallèle il suit des études de cinéma à la Sorbonne nouvelle qu’il mène jusqu’en 1ère année de master. En 2022 il réalise La veste bleue pour Arte. En 2023 il intègre le collectif OFBPC en tant qu’acteur et assistant à la mise en scène. En 2026 il apparaît dans plusieurs séries télé (Arte, TF1) et dans Petit Frère réalisé par Serhat Karaaslan.</p>
+          <p>Victor Fisbach est un jeune acteur parisien. Après un an de classe préparatoire littéraire, il intègre le conservatoire du XIXème puis du VIIIème arrondissement pendant 2 puis 3 ans. Il y travaille avec Emilie Anna Maillet et Agnès Adam. En parallèle il suit des études de cinéma à la Sorbonne nouvelle qu'il mène jusqu'en 1ère année de master. En 2022 il réalise La veste bleue pour Arte. En 2023 il intègre le collectif OFBPC en tant qu'acteur et assistant à la mise en scène. En 2026 il apparaît dans plusieurs séries télé (Arte, TF1) et dans Petit Frère réalisé par Serhat Karaaslan.</p>
         </div>
       </div>
 
@@ -500,7 +544,7 @@
         <div class="team-info">
           <h2>Charles Montélimard</h2>
           <span class="role">Acteur et réalisateur</span>
-          <p>Charles Montélimard est acteur et réalisateur, membre du collectif OFBPC depuis sa création. Il suit la formation donnée par Agnès Adam au conservatoire du VIIIe arrondissement et réalise un film inspiré de l’œuvre Sur la Grand’Route d’Anton Tchekhov à sa sortie de conservatoire. Charles est acteur dans les mises en scène de Lior Aidan, Ferdinand Mochot et Maxime Allègre et continue l’écriture de projets filmiques en parallèle.</p>
+          <p>Charles Montélimard est acteur et réalisateur, membre du collectif OFBPC depuis sa création. Il suit la formation donnée par Agnès Adam au conservatoire du VIIIe arrondissement et réalise un film inspiré de l'œuvre Sur la Grand'Route d'Anton Tchekhov à sa sortie de conservatoire. Charles est acteur dans les mises en scène de Lior Aidan, Ferdinand Mochot et Maxime Allègre et continue l'écriture de projets filmiques en parallèle.</p>
         </div>
       </div>
 
@@ -511,7 +555,7 @@
         <div class="team-info">
           <h2>Athénaé Maso y Guell Rivet</h2>
           <span class="role">Actrice</span>
-          <p>Athénaé suit des études de lettres après le lycée et obtient une licence de philosophie. Elle intègre le conservatoire du 8e arrondissement de Paris en septembre 2021 dans la classe d’Agnès Adam. En 2023, elle joue dans les pièces des Enfants Trouvé à Paris et dans le festival OFF d’Avignon. Elle touche au cinéma en jouant dans des films bénévoles en 2023 et 2024. Elle rejoint le Collectif OFBPC en 2023 en tant que comédienne dans Silence is Death mit en scène par Ferdinand Mochot. Prochainement, elle jouera dans Les Naufragés mit en scène par Maxime Allègre assisté par Victor Fisbach.</p>
+          <p>Athénaé suit des études de lettres après le lycée et obtient une licence de philosophie. Elle intègre le conservatoire du 8e arrondissement de Paris en septembre 2021 dans la classe d'Agnès Adam. En 2023, elle joue dans les pièces des Enfants Trouvé à Paris et dans le festival OFF d'Avignon. Elle touche au cinéma en jouant dans des films bénévoles en 2023 et 2024. Elle rejoint le Collectif OFBPC en 2023 en tant que comédienne dans Silence is Death mit en scène par Ferdinand Mochot. </p>
         </div>
       </div>
 
@@ -523,6 +567,25 @@
           <h2>Camille Doucet</h2>
           <span class="role">Dramaturge et chargée de diffusion</span>
           <p>Camille Doucet commence le théâtre très jeune puis mène des études plus théoriques en entrant en prépa Khâgne théâtre au lycée Claude Monet avec des professeurs tels que Edgar Petitier en analyse dramaturgique, Céline Schaeffer (assistante à la mise en scène de Novarina) en mise en scène et direction d'acteur, mais aussi Emmanuel Clolus (scénographe de Wajdi Mouawad) en création de maquette. En 2019, en parallèle de sa licence elle intègre le conservatoire du 16e arrondissement, où elle collabore avec Lior Aidan dans le jeu et la mise en scène. Elle obtient ensuite son Master de Lettres et Arts à Paris Diderot, avec un mémoire sur la notion de théâtralité dans les Arts visuels, puis obtient un poste en tant qu'attachée de production dans la Cie Jeune Public Minute Papillon. Elle intègre le projet de Lior Aidan en tant que dramaturge, épanouissant aussi bien son amour de la scène que sa passion pour la littérature et l'analyse.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="collab-heading">
+      <h2>Ils travaillent avec nous</h2>
+    </div>
+
+    <div class="team-grid">
+
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="marina.jpg" alt="Marina Mouniapin">
+        </div>
+        <div class="team-info">
+          <h2>Marina Mouniapin</h2>
+          <span class="role">Comédienne</span>
+          <p>Originaire de l'île de la Réunion, Marina Mouniapin entre au Conservatoire à rayonnement régional de Saint-Denis. Durant sa formation elle travaille avec différents artistes, Nicolas Givran, Lolita Tergemina, Marcelino Méduse, et les compagnies Qu'avez-vous fait de ma bonté, les déboussolées et Alpaca rose. En 2023, elle intègre le Conservatoire National Supérieur d'Art Dramatique de Paris (CNSAD), où elle travaille avec Valérie Dréville, Agnès Adam, Eva Doumbia, Nada Strancar et les chorégraphes Caroline Marcadet, Jean-Marc Hoolbecq et Juliette Roudet. En 2024, elle interprète avec une partie de sa promotion Jouer avec les fantômes, projet créé et mis en scène par Anne Monfort à partir des archives de la troupe du Nouveau Théâtre Populaire, à la Maison Jean Vilar, pendant le Festival d'Avignon. Elle collaborera à nouveau avec Anne Monfort pour sa création 2027. Elle joue dans le spectacle <em>Les Naufragés</em> pour le Collectif OFBPC.</p>
         </div>
       </div>
 
